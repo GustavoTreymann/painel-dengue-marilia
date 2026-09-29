@@ -1,5 +1,8 @@
 # Painel de vigilância da dengue em Marília
 
+**Painel publicado:** https://painel-dengue-marilia.onrender.com
+(plano gratuito do Render: o primeiro acesso após inatividade pode levar cerca de 50 segundos)
+
 Projeto Integrador em Computação II — Bacharelado em Ciência de Dados — Univesp.
 
 Painel web que consome dados abertos de vigilância de arboviroses, calcula indicadores

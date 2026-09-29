@@ -472,11 +472,15 @@ P(f"**Resultado da etapa implementar.** A solução conta com {TESTES} testes au
   "informam o estado aberto ou fechado ao leitor de tela, e o foco tem contorno visível. Em tela de "
   "celular (375 pixels) não há rolagem horizontal. Ferramentas automáticas não substituem o teste com "
   "usuários de tecnologia assistiva, que será buscado na aplicação do questionário. O código está "
-  f"versionado em Git desde o início, com {COMMITS} registros (*commits*) descritivos até a data deste relatório.")
-P("**Próximos passos.** Até a entrega final estão previstos: (a) publicação do repositório no GitHub e "
-  "do painel no Render, com banco no Neon; (b) aplicação do questionário do Apêndice A a moradores e "
-  "profissionais de saúde, para avaliar a compreensão do painel e coletar sugestões; (c) teste do "
-  "painel com leitor de tela (NVDA); e (d) incorporação das devolutivas ao painel e ao relatório final.")
+  f"versionado em Git desde o início, com {COMMITS} registros (*commits*) descritivos até a data deste relatório, publicados em repositório público no GitHub "
+  "(https://github.com/GustavoTreymann/painel-dengue-marilia). O painel está em produção no Render "
+  "(https://painel-dengue-marilia.onrender.com), com banco PostgreSQL no Neon, ambos em planos gratuitos. "
+  "A primeira ingestão em nuvem, em 29/09/2026, já incorporou a semana 38 de 2026, publicada pelo "
+  "InfoDengue depois do recorte usado nesta análise; por isso os totais exibidos no painel podem diferir "
+  "levemente dos apresentados nas tabelas deste relatório.")
+P("**Próximos passos.** Até a entrega final estão previstos: (a) aplicação do questionário do Apêndice A "
+  "a moradores e profissionais de saúde, para avaliar a compreensão do painel e coletar sugestões; (b) teste "
+  "do painel com leitor de tela (NVDA); e (c) incorporação das devolutivas ao painel e ao relatório final.")
 
 # --------------------------------------------------------------- REFERENCIAS
 P("Referências", H1)

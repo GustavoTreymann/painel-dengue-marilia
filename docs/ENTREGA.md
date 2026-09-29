@@ -32,7 +32,9 @@ Arquivo: `docs/relatorio/Plano_de_Acao_PI2.docx`.
       registro do que você fez antes de 28/09 — ajuste para o que de fato aconteceu
 - [ ] Perguntar à tutora se aceita envio em atraso
 
-## 3. Publicar o código no GitHub (requisito "controle de versão")
+## 3. Publicar o código no GitHub (requisito "controle de versão") — FEITO
+
+https://github.com/GustavoTreymann/painel-dengue-marilia
 
 1. Criar em https://github.com/new um repositório **público** chamado `painel-dengue-marilia`, sem README.
 2. No terminal, dentro da pasta do projeto:
@@ -42,7 +44,9 @@ git remote add origin https://github.com/SEU_USUARIO/painel-dengue-marilia.git
 git push -u origin main
 ```
 
-## 4. Publicar o painel na nuvem (requisito "nuvem")
+## 4. Publicar o painel na nuvem (requisito "nuvem") — FEITO
+
+https://painel-dengue-marilia.onrender.com (Render, região Ohio; banco no Neon, projeto misty-flower-97949835). O Render foi ligado pela URL pública do repositório, sem OAuth: depois de cada push, fazer "Manual Deploy" no painel do Render.
 
 1. **Neon** (https://neon.tech): criar conta gratuita e um projeto; copiar a *connection string*
    (começa com `postgresql://`).
