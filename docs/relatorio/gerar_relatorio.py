@@ -22,6 +22,10 @@ CURSO = "Bacharelado em Ciência de Dados"
 TUTORA = "Jessica Caroline Pena Alves Da Silva"
 FONTE_AUTOR = "Fonte: elaborado pelo autor (2026)."
 
+import subprocess
+COMMITS = int(subprocess.run(["git", "rev-list", "--count", "HEAD"], cwd=RAIZ, capture_output=True, text=True).stdout) + 1
+TESTES = sum(t.read_text(encoding="utf-8").count("it(") for t in (RAIZ / "tests").rglob("*.test.js"))
+
 d = docx.Document(MODELO)
 corpo = d.element.body
 filhos = list(corpo.iterchildren())
@@ -193,7 +197,7 @@ RESUMO = (
     "com pico de 2.925 casos na semana 10 de 2025 e 24,4% do período em nível vermelho de alerta. "
     "Observou-se correlação positiva moderada entre temperatura e incidência, mais forte para a temperatura "
     "mínima (r = 0,474), sem defasagem preferencial distinguível entre 0 e 6 semanas. O protótipo funciona "
-    "ponta a ponta com dados reais e conta com 83 testes automatizados. Conclui-se, de forma preliminar, que "
+    f"ponta a ponta com dados reais e conta com {TESTES} testes automatizados. Conclui-se, de forma preliminar, que "
     "o painel torna o dado aberto legível e que a relação clima–incidência deve ser apresentada como "
     "associação descritiva, e não como previsão."
 )
@@ -455,19 +459,24 @@ P("Os dados **não** sustentam, porém, uma defasagem preferencial. Para a tempe
   "clima (Figura 5) passou a informar a faixa de variação do coeficiente entre as defasagens, e não "
   "apenas o valor máximo, para não sugerir ao leitor um atraso que o dado não demonstra.")
 figura("fig-painel-clima.png", "Painel: relação entre temperatura média e incidência", 14.5)
-P("**Resultado da etapa implementar.** A solução conta com 83 testes automatizados. A cobertura das "
+P(f"**Resultado da etapa implementar.** A solução conta com {TESTES} testes automatizados. A cobertura das "
   "camadas de análise de dados e de API é de 100% das linhas e funções, acima da meta de 80% definida "
-  "no projeto. Os testes de acessibilidade com axe-core não apontaram violações das regras A e AA sobre "
-  "a estrutura da página e sobre cada tabela gerada. É preciso registrar o alcance dessa verificação: "
-  "o axe-core, executado sem renderização gráfica, não avalia o contraste de cores, e por isso a "
-  "conformidade completa com a WCAG 2.1 AA ainda não pode ser afirmada; o contraste será verificado no "
-  "navegador na próxima etapa. O código está versionado em Git desde o início, com 31 registros "
-  "(*commits*) descritivos até a data deste relatório.")
+  "no projeto. A acessibilidade foi verificada em dois níveis. Na suíte de testes, o axe-core não "
+  "apontou violações das regras A e AA sobre a estrutura da página e sobre cada tabela gerada; como "
+  "essa execução ocorre sem renderização gráfica, ela não avalia contraste. Por isso, a página já "
+  "renderizada no navegador, com dados reais e todas as tabelas abertas, foi verificada com o axe-core "
+  "(regras WCAG 2.0 e 2.1, níveis A e AA), sem violações, e complementada por medição direta: todos os "
+  "textos têm contraste entre 7,2:1 e 17,4:1 (o mínimo AA é 4,5:1) e as cores dos gráficos têm no "
+  "mínimo 4,9:1 contra o fundo (o mínimo para elementos não textuais é 3:1). A navegação por teclado "
+  "foi testada: há link para pular ao conteúdo, os botões de tabela funcionam com a tecla Enter e "
+  "informam o estado aberto ou fechado ao leitor de tela, e o foco tem contorno visível. Em tela de "
+  "celular (375 pixels) não há rolagem horizontal. Ferramentas automáticas não substituem o teste com "
+  "usuários de tecnologia assistiva, que será buscado na aplicação do questionário. O código está "
+  f"versionado em Git desde o início, com {COMMITS} registros (*commits*) descritivos até a data deste relatório.")
 P("**Próximos passos.** Até a entrega final estão previstos: (a) publicação do repositório no GitHub e "
   "do painel no Render, com banco no Neon; (b) aplicação do questionário do Apêndice A a moradores e "
-  "profissionais de saúde, para avaliar a compreensão do painel e coletar sugestões; (c) verificação de "
-  "contraste e navegação por teclado no navegador; e (d) incorporação das devolutivas ao painel e ao "
-  "relatório final.")
+  "profissionais de saúde, para avaliar a compreensão do painel e coletar sugestões; (c) teste do "
+  "painel com leitor de tela (NVDA); e (d) incorporação das devolutivas ao painel e ao relatório final.")
 
 # --------------------------------------------------------------- REFERENCIAS
 P("Referências", H1)

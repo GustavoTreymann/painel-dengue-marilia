@@ -115,7 +115,7 @@ quinzenas = [
      ("Análise exploratória da API do InfoDengue para Marília", "28/09/2026", "28/09/2026", "90 semanas reais confirmadas"),
      ("Documento de projeto e plano de implementação", "28/09/2026", "28/09/2026", "")],
     [("Implementação do protótipo: ingestão, banco, API REST e painel", "28/09/2026", "29/09/2026", "Desenvolvimento orientado a testes"),
-     ("Testes automatizados e revisão de código", "28/09/2026", "29/09/2026", "83 testes"),
+     ("Testes automatizados e revisão de código", "28/09/2026", "29/09/2026", "86 testes"),
      ("Redação do Relatório Parcial", "29/09/2026", "30/09/2026", ""),
      ("Entrega do Relatório Parcial", "30/09/2026", "30/09/2026", "Prazo: 30/09, 23h59")],
     [("Publicação do código no GitHub e do painel em nuvem (Render e Neon)", "01/10/2026", "05/10/2026", ""),

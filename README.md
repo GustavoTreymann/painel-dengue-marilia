@@ -29,6 +29,12 @@ npm start
 
 O painel fica em http://localhost:3000.
 
+Para demonstrar sem Docker nem banco, com a série real salva em `dados/infodengue_marilia.json`:
+
+```bash
+node scripts/demo-sem-banco.js
+```
+
 ## Testes
 
 ```bash
@@ -51,16 +57,22 @@ epidemiológica, sem informação pessoal.
 
 ## Acessibilidade: o que está verificado e como
 
-O objetivo é o nível AA da WCAG 2.1. O que está comprovado automaticamente e o que foi
-verificado por inspeção estão separados abaixo, porque a ferramenta automática não cobre tudo.
+A meta é o nível AA da WCAG 2.1. A verificação foi feita em camadas, porque nenhuma ferramenta
+cobre tudo sozinha.
 
-- **Verificado pelo axe-core (testes automatizados):** o esqueleto da página (`index.html`) e cada
-  tabela gerada, isoladamente, não têm violações das regras A e AA que o axe consegue avaliar.
-- **Não coberto pelo axe nestes testes:** o axe roda em jsdom, sem renderização, então não avalia
-  contraste de cores; também não vê a página já preenchida, porque as tabelas são injetadas por
-  JavaScript depois do carregamento.
-- **Verificado por inspeção:** cada gráfico tem tabela equivalente com os mesmos dados; os níveis
-  de alerta são descritos por texto e não apenas por cor; o painel respeita `prefers-reduced-motion`.
+- **Testes automatizados (axe-core em jsdom):** o esqueleto da página e cada tabela gerada não têm
+  violações A/AA. Sem renderização, essa etapa não mede contraste.
+- **Página renderizada no navegador (axe-core, regras WCAG 2.0/2.1 A e AA):** com dados reais e todas
+  as tabelas abertas, nenhuma violação.
+- **Contraste medido:** textos entre 7,2:1 e 17,4:1 (mínimo AA 4,5:1); cores dos gráficos com no
+  mínimo 4,9:1 contra o fundo (mínimo 3:1 para elementos não textuais).
+- **Teclado:** link para pular ao conteúdo, botões de tabela operáveis por Enter com `aria-expanded`,
+  foco visível de 3px.
+- **Celular (375px):** sem rolagem horizontal.
+- **Pendente:** teste com usuários de leitor de tela.
+
+Cada gráfico tem tabela equivalente com os mesmos dados, e os níveis de alerta são sempre descritos
+por texto, nunca só por cor.
 
 ## Limitações conhecidas
 
