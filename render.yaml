@@ -3,6 +3,7 @@ services:
     name: painel-dengue-marilia
     runtime: node
     plan: free
+    region: ohio
     buildCommand: npm ci
     startCommand: npm start
     healthCheckPath: /healthz
