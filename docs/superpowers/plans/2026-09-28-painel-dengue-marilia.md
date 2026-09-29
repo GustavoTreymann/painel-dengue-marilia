@@ -445,7 +445,7 @@ export function correlacaoDefasada(registros, campoClima, maxDefasagem) {
 - [ ] **Step 4: Rodar e confirmar que passa**
 
 Run: `npx vitest run tests/analytics/correlacao.test.js`
-Expected: PASS, 11 testes.
+Expected: PASS, 10 testes.
 
 - [ ] **Step 5: Commit**
 
