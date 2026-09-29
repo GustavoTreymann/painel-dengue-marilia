@@ -13,3 +13,17 @@ export function mediaMovel(valores, janela) {
     return trecho.reduce((soma, v) => soma + v, 0) / janela;
   });
 }
+
+/**
+ * Classifica a tendencia de transmissao pelas duas ultimas semanas com Rt.
+ * Rt acima de 1 significa que cada caso gera mais de um novo caso.
+ */
+export function tendenciaRt(rts) {
+  const validos = rts.filter((v) => v !== null && v !== undefined);
+  if (validos.length < 2) return 'indefinida';
+
+  const [penultimo, ultimo] = validos.slice(-2);
+  if (penultimo > 1 && ultimo > 1) return 'crescimento';
+  if (penultimo < 1 && ultimo < 1) return 'retracao';
+  return 'estavel';
+}
