@@ -3,13 +3,14 @@ import { mediaMovel, tendenciaRt, correlacaoDefasada, resumoAlertas, ROTULOS_NIV
 
 const FORMATO_SE = /^\d{6}$/;
 const MAX_DEFASAGEM = 6;
+const MSG_SEM_DADOS = 'dados indisponiveis no momento';
 
 function lerSemana(valor, nome) {
   if (valor === undefined) return null;
   if (!FORMATO_SE.test(valor)) {
     throw Object.assign(
       new Error(`parametro "${nome}" deve ser uma semana epidemiologica no formato AAAASS`),
-      { status: 400 }
+      { status: 400, publica: true }
     );
   }
   return Number(valor);
@@ -18,14 +19,17 @@ function lerSemana(valor, nome) {
 export function criarRotas({ listar, ultima }) {
   const rotas = Router();
 
-  /** Falha do acesso a dados vira 503; qualquer outra e erro nosso e vira 500. */
+  /**
+   * Falha do acesso a dados vira 503; qualquer outra e erro nosso e vira 500.
+   * O detalhe fica so no log: a mensagem do driver pode trazer usuario e host
+   * do banco, e o painel e publico.
+   */
   const comBanco = async (operacao) => {
     try {
       return await operacao();
     } catch (falha) {
-      throw Object.assign(
-        new Error(`dados indisponiveis: ${falha.message}`), { status: 503 }
-      );
+      console.error('falha de acesso a dados:', falha);
+      throw Object.assign(new Error(MSG_SEM_DADOS), { status: 503, publica: true });
     }
   };
 
@@ -38,7 +42,8 @@ export function criarRotas({ listar, ultima }) {
       res.set('Cache-Control', 'public, max-age=3600');
       res.json(corpo);
     } catch (falha) {
-      res.status(falha.status ?? 500).json({ erro: falha.message });
+      if (!falha?.publica) console.error('erro interno:', falha);
+      res.status(falha?.status ?? 500).json({ erro: falha?.publica ? falha.message : 'erro interno' });
     }
   };
 
@@ -111,7 +116,8 @@ export function criarRotas({ listar, ultima }) {
       await ultima();
       res.json({ ok: true });
     } catch (falha) {
-      res.status(503).json({ ok: false, erro: falha.message });
+      console.error('healthz sem banco:', falha);
+      res.status(503).json({ ok: false, erro: MSG_SEM_DADOS });
     }
   });
 

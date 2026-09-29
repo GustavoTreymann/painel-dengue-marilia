@@ -130,3 +130,27 @@ describe('GET /api/status e /healthz', () => {
     expect(resposta.status).toBe(503);
   });
 });
+
+describe('mensagens de erro publicas', () => {
+  const segredo = 'password authentication failed for user "painel_prod" at ep-segredo.neon.tech';
+  const falhaBanco = async () => { throw new Error(segredo); };
+
+  it('nao repassa ao cliente o detalhe da falha do banco nas rotas da API', async () => {
+    const resposta = await request(app({ listar: falhaBanco })).get('/api/series');
+    expect(resposta.status).toBe(503);
+    expect(resposta.body.erro).toBe('dados indisponiveis no momento');
+    expect(JSON.stringify(resposta.body)).not.toContain('painel_prod');
+  });
+
+  it('nao repassa ao cliente o detalhe da falha do banco no healthz', async () => {
+    const resposta = await request(app({ ultima: falhaBanco })).get('/healthz');
+    expect(resposta.status).toBe(503);
+    expect(JSON.stringify(resposta.body)).not.toContain('neon.tech');
+  });
+
+  it('nao repassa ao cliente o detalhe de um erro interno', async () => {
+    const resposta = await request(app({ listar: async () => null })).get('/api/indicadores');
+    expect(resposta.status).toBe(500);
+    expect(resposta.body.erro).toBe('erro interno');
+  });
+});
