@@ -465,7 +465,7 @@ git commit -m "Adiciona correlacao de Pearson e busca de defasagem clima x incid
 **Interfaces:**
 - Consumes: nada
 - Produces: `resumoAlertas(registros) => Array<{ nivel: 1|2|3|4, rotulo: string, semanas: number, percentual: number }>`
-- Rótulos fixos: 1 `'Verde - sem indicio de risco'`, 2 `'Amarelo - alerta de transmissao'`, 3 `'Laranja - transmissao sustentada'`, 4 `'Vermelho - risco de epidemia'`
+- Rótulos fixos: 1 `'Verde - condicoes desfavoraveis a transmissao'`, 2 `'Amarelo - condicoes favoraveis a transmissao'`, 3 `'Laranja - transmissao sustentada'`, 4 `'Vermelho - alta incidencia'`
 
 - [ ] **Step 1: Escrever o teste que falha**
 
@@ -483,7 +483,7 @@ describe('resumoAlertas', () => {
     expect(resumo).toHaveLength(4);
     expect(resumo[0]).toEqual({
       nivel: 1,
-      rotulo: 'Verde - sem indicio de risco',
+      rotulo: 'Verde - condicoes desfavoraveis a transmissao',
       semanas: 2,
       percentual: 50
     });
@@ -518,10 +518,10 @@ Append to `src/analytics/index.js`:
 
 ```js
 export const ROTULOS_NIVEL = {
-  1: 'Verde - sem indicio de risco',
-  2: 'Amarelo - alerta de transmissao',
+  1: 'Verde - condicoes desfavoraveis a transmissao',
+  2: 'Amarelo - condicoes favoraveis a transmissao',
   3: 'Laranja - transmissao sustentada',
-  4: 'Vermelho - risco de epidemia'
+  4: 'Vermelho - alta incidencia'
 };
 
 /** Distribuicao de semanas por nivel de alerta, sempre com os quatro niveis. */
@@ -1170,8 +1170,8 @@ describe('GET /api/series', () => {
 
   it('envia o rotulo textual do nivel junto de cada semana', async () => {
     const resposta = await request(app()).get('/api/series');
-    expect(resposta.body.semanas[0].rotuloNivel).toBe('Verde - sem indicio de risco');
-    expect(resposta.body.semanas[11].rotuloNivel).toBe('Vermelho - risco de epidemia');
+    expect(resposta.body.semanas[0].rotuloNivel).toBe('Verde - condicoes desfavoraveis a transmissao');
+    expect(resposta.body.semanas[11].rotuloNivel).toBe('Vermelho - alta incidencia');
   });
 
   it('repassa o filtro de periodo', async () => {
@@ -1383,9 +1383,9 @@ import axe from 'axe-core';
 import { montarTabelaSeries, montarTabelaAlertas } from '../../src/web/tabela.js';
 
 const semanas = [
-  { se: 202501, casos: 10, mediaMovel: null, rotuloNivel: 'Verde - sem indicio de risco' },
-  { se: 202502, casos: 20, mediaMovel: null, rotuloNivel: 'Amarelo - alerta de transmissao' },
-  { se: 202503, casos: 30, mediaMovel: 20, rotuloNivel: 'Vermelho - risco de epidemia' },
+  { se: 202501, casos: 10, mediaMovel: null, rotuloNivel: 'Verde - condicoes desfavoraveis a transmissao' },
+  { se: 202502, casos: 20, mediaMovel: null, rotuloNivel: 'Amarelo - condicoes favoraveis a transmissao' },
+  { se: 202503, casos: 30, mediaMovel: 20, rotuloNivel: 'Vermelho - alta incidencia' },
   { se: 202504, casos: null, mediaMovel: null, rotuloNivel: null, parcial: true }
 ];
 
@@ -1425,10 +1425,10 @@ describe('montarTabelaSeries', () => {
 
 describe('montarTabelaAlertas', () => {
   const alertas = [
-    { nivel: 1, rotulo: 'Verde - sem indicio de risco', semanas: 40, percentual: 50 },
-    { nivel: 2, rotulo: 'Amarelo - alerta de transmissao', semanas: 20, percentual: 25 },
+    { nivel: 1, rotulo: 'Verde - condicoes desfavoraveis a transmissao', semanas: 40, percentual: 50 },
+    { nivel: 2, rotulo: 'Amarelo - condicoes favoraveis a transmissao', semanas: 20, percentual: 25 },
     { nivel: 3, rotulo: 'Laranja - transmissao sustentada', semanas: 12, percentual: 15 },
-    { nivel: 4, rotulo: 'Vermelho - risco de epidemia', semanas: 8, percentual: 10 }
+    { nivel: 4, rotulo: 'Vermelho - alta incidencia', semanas: 8, percentual: 10 }
   ];
 
   it('gera uma linha por nivel com contagem e percentual', () => {
