@@ -443,7 +443,7 @@ tabela("Maior correlação entre variável climática e incidência",
        ["Variável", "Maior r", "Defasagem do maior r", "Pares (n)"],
        [["Temperatura mínima", "0,474", "3 semanas", "87"],
         ["Temperatura média", "0,426", "3 semanas", "87"],
-        ["Temperatura máxima", "0,322", "0 semana", "90"],
+        ["Temperatura máxima", "0,322", "0 semanas", "90"],
         ["Umidade média", "0,222", "4 semanas", "86"]],
        [5.0, 2.5, 4.5, 2.5], "Fonte: elaborado pelo autor (2026), com dados do InfoDengue.")
 figura("fig-correlacao-defasagem.png", "Coeficiente de correlação por defasagem entre clima e incidência", 15)
