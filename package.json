@@ -1,0 +1,25 @@
+{
+  "name": "painel-dengue-marilia",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Painel de vigilancia da dengue em Marilia - Projeto Integrador II Univesp",
+  "scripts": {
+    "dev": "node --watch servidor.js",
+    "start": "node servidor.js",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "cobertura": "vitest run --coverage"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "node-cron": "^3.0.3",
+    "pg": "^8.13.1"
+  },
+  "devDependencies": {
+    "@vitest/coverage-v8": "^2.1.8",
+    "axe-core": "^4.10.2",
+    "jsdom": "^25.0.1",
+    "supertest": "^7.0.0",
+    "vitest": "^2.1.8"
+  }
+}
