@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: painel-dengue-marilia
+    runtime: node
+    plan: free
+    buildCommand: npm ci
+    startCommand: npm start
+    healthCheckPath: /healthz
+    envVars:
+      - key: GEOCODE
+        value: "3529005"
+      - key: DATABASE_URL
+        sync: false
