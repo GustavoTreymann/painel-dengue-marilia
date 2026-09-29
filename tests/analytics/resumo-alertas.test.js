@@ -9,7 +9,7 @@ describe('resumoAlertas', () => {
     expect(resumo).toHaveLength(4);
     expect(resumo[0]).toEqual({
       nivel: 1,
-      rotulo: 'Verde - sem indicio de risco',
+      rotulo: 'Verde - condicoes desfavoraveis a transmissao',
       semanas: 2,
       percentual: 50
     });

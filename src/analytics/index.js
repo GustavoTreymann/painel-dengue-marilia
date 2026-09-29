@@ -104,10 +104,10 @@ export function correlacaoDefasada(registros, campoClima, maxDefasagem) {
 }
 
 export const ROTULOS_NIVEL = {
-  1: 'Verde - sem indicio de risco',
-  2: 'Amarelo - alerta de transmissao',
+  1: 'Verde - condicoes desfavoraveis a transmissao',
+  2: 'Amarelo - condicoes favoraveis a transmissao',
   3: 'Laranja - transmissao sustentada',
-  4: 'Vermelho - risco de epidemia'
+  4: 'Vermelho - alta incidencia'
 };
 
 /** Distribuicao de semanas por nivel de alerta, sempre com os quatro niveis. */
