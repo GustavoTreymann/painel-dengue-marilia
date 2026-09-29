@@ -17,7 +17,7 @@ describe('montarTabelaSeries', () => {
 
     expect(doc.querySelector('caption')).toBeTruthy();
     expect(doc.querySelectorAll('tbody tr')).toHaveLength(4);
-    expect(doc.querySelectorAll('thead th[scope="col"]').length).toBeGreaterThan(0);
+    expect(doc.querySelectorAll('thead th[scope="col"]')).toHaveLength(4);
   });
 
   it('mostra semana sem dado como texto explicito, nunca como zero', () => {
@@ -26,6 +26,23 @@ describe('montarTabelaSeries', () => {
     const celulaCasos = ultimaLinha.querySelectorAll('td')[0];
     expect(celulaCasos.textContent.trim()).toBe('em consolidacao');
     expect(celulaCasos.textContent.trim()).not.toBe('0');
+  });
+
+  it('mostra zero real como zero, nunca como ausencia de dado', () => {
+    const comZero = [{ se: 202505, casos: 0, mediaMovel: 0, rotuloNivel: 'Verde - condicoes desfavoraveis a transmissao' }];
+    const doc = new JSDOM(`<main>${montarTabelaSeries(comZero)}</main>`).window.document;
+    const celulas = doc.querySelectorAll('tbody tr td');
+
+    expect(celulas[0].textContent.trim()).toBe('0');
+    expect(celulas[0].textContent.trim()).not.toBe('em consolidacao');
+  });
+
+  it('mostra ausencia de nivel como texto, nunca como um nivel falso', () => {
+    const doc = new JSDOM(`<main>${montarTabelaSeries(semanas)}</main>`).window.document;
+    const ultimaLinha = doc.querySelectorAll('tbody tr')[3];
+    const celulaNivel = ultimaLinha.querySelectorAll('td')[2];
+
+    expect(celulaNivel.textContent.trim()).toBe('em consolidacao');
   });
 
   it('descreve o nivel de alerta por texto, nao so por cor', () => {
