@@ -42,7 +42,7 @@ def preencher(sdt, texto):
 
 
 controles = list(d.element.body.iter(qn("w:sdt")))
-preencher(controles[0], f"{AUTOR} – RA: [preencher]")
+preencher(controles[0], f"{AUTOR} – RA: 24215109")
 for extra in controles[1:7]:  # grupo de um integrante: demais linhas de nome saem
     extra.getparent().remove(extra)
 

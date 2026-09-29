@@ -27,7 +27,7 @@ powershell -ExecutionPolicy Bypass -File docs/relatorio/atualizar_campos.ps1
 
 Arquivo: `docs/relatorio/Plano_de_Acao_PI2.docx`.
 
-- [ ] Trocar `RA: [preencher]` pelo seu RA
+- [x] RA preenchido (24215109)
 - [ ] Conferir as atividades das quinzenas 1 a 3: estão como "conforme calendário do AVA" porque não há
       registro do que você fez antes de 28/09 — ajuste para o que de fato aconteceu
 - [ ] Perguntar à tutora se aceita envio em atraso
