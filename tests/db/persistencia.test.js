@@ -78,4 +78,12 @@ describe('persistencia', () => {
     expect(lida.rt).toBeNull();
     expect(lida.tempMed).toBeNull();
   });
+
+  it('devolve a data de inicio exatamente como gravada, sem deslocar por fuso', async () => {
+    await salvarSemanas(pool, [registro(202512, { dataInicio: '2025-03-23' })]);
+    const lida = (await listarSemanas(pool, { de: 202512, ate: 202512 }))[0];
+
+    expect(lida.dataInicio).toBe('2025-03-23');
+    expect(typeof lida.dataInicio).toBe('string');
+  });
 });

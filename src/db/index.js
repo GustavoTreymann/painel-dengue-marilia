@@ -2,11 +2,30 @@ import pg from 'pg';
 
 const { Pool } = pg;
 
+// O driver devolve DATE como um Date construido no fuso LOCAL. Converter esse
+// objeto para ISO reexpressa em UTC e desloca a data um dia para tras em
+// qualquer host com fuso positivo — o painel mostraria a semana errada no
+// deploy sem falhar em nenhum teste rodado no Brasil. Lendo a coluna como
+// texto, a data chega exatamente como o banco a guardou.
+pg.types.setTypeParser(1082, (valor) => valor);
+
+const HOSTS_LOCAIS = ['localhost', '127.0.0.1', '[::1]', '::1'];
+
+/** Sem SSL so para banco local; em nuvem o certificado e validado de verdade. */
 export function criarPool(urlConexao) {
-  return new Pool({
+  const local = HOSTS_LOCAIS.some((host) => urlConexao.includes(host));
+
+  const pool = new Pool({
     connectionString: urlConexao,
-    ssl: urlConexao.includes('localhost') ? false : { rejectUnauthorized: false }
+    ssl: local ? false : { rejectUnauthorized: process.env.DATABASE_SSL_INSECURE !== 'true' }
   });
+
+  // Sem este ouvinte, um erro em cliente ocioso derruba o processo inteiro.
+  pool.on('error', (falha) => {
+    console.error('Erro em cliente ocioso do pool:', falha.message);
+  });
+
+  return pool;
 }
 
 export async function migrar(pool) {
@@ -73,7 +92,8 @@ function paraRegistro(linha) {
   const num = (v) => (v === null ? null : Number(v));
   return {
     se: linha.se,
-    dataInicio: linha.data_inicio.toISOString().slice(0, 10),
+    // Ja chega como texto AAAA-MM-DD por causa do parser registrado acima.
+    dataInicio: linha.data_inicio,
     casos: linha.casos,
     casosEst: num(linha.casos_est),
     casosEstMin: linha.casos_est_min,
