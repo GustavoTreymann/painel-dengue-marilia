@@ -70,6 +70,37 @@ describe('GET /api/indicadores', () => {
   });
 });
 
+describe('respostas de erro', () => {
+  it('nao marca resposta de erro como cacheavel', async () => {
+    const resposta = await request(app({ listar: async () => { throw new Error('sem banco'); } }))
+      .get('/api/series');
+    expect(resposta.status).toBe(503);
+    expect(resposta.headers['cache-control']).toBeUndefined();
+  });
+
+  it('devolve 500, e nao 503, quando o erro nao e do banco', async () => {
+    // listar resolve com sucesso (nao e falha de acesso a dados), mas devolve
+    // um valor sem forma de lista: o bug esta no processamento, nao no banco.
+    const resposta = await request(app({ listar: async () => null }))
+      .get('/api/indicadores');
+    expect(resposta.status).toBe(500);
+  });
+});
+
+describe('GET /api/indicadores com semana sem casos', () => {
+  it('nao conta semana sem casos como zero nem deixa ela vencer o pico', async () => {
+    const comLacuna = [
+      { se: 202501, casos: null, rt: 1.1, nivel: 2, parcial: false },
+      { se: 202502, casos: 7, rt: 1.1, nivel: 2, parcial: false }
+    ];
+    const resposta = await request(app({ listar: async () => comLacuna })).get('/api/indicadores');
+
+    expect(resposta.status).toBe(200);
+    expect(resposta.body.totalCasos).toBe(7);
+    expect(resposta.body.semanaPico).toEqual({ se: 202502, casos: 7 });
+  });
+});
+
 describe('GET /api/clima', () => {
   it('devolve a defasagem de maior correlacao para temperatura e umidade', async () => {
     const resposta = await request(app()).get('/api/clima');
