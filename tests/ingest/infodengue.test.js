@@ -37,6 +37,24 @@ describe('normalizarRegistro', () => {
     expect(r.tempMed).toBeNull();
   });
 
+  it('trata string vazia em casos como ausencia, nunca como zero', () => {
+    const r = normalizarRegistro({ SE: 202601, data_iniSE: 1735603200000, casos: '' });
+    expect(r.casos).toBeNull();
+    expect(r.parcial).toBe(true);
+  });
+
+  it('trata valor nao numerico em casos como ausencia, nunca como NaN', () => {
+    const r = normalizarRegistro({ SE: 202602, data_iniSE: 1735603200000, casos: 'indisponivel' });
+    expect(r.casos).toBeNull();
+    expect(r.parcial).toBe(true);
+  });
+
+  it('preserva zero legitimo de casos como zero, nao como ausencia', () => {
+    const r = normalizarRegistro({ SE: 202603, data_iniSE: 1735603200000, casos: 0 });
+    expect(r.casos).toBe(0);
+    expect(r.parcial).toBe(false);
+  });
+
   it('normaliza toda a fixture sem lancar erro', () => {
     const todos = bruto.map(normalizarRegistro);
     expect(todos).toHaveLength(90);
