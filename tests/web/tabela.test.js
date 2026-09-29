@@ -116,13 +116,13 @@ describe('montarTabelaClima', () => {
     const linhas = doc.querySelectorAll('tbody tr');
     expect(linhas).toHaveLength(2);
     expect(linhas[0].querySelector('th').textContent.trim()).toBe('202501');
-    expect([...linhas[0].querySelectorAll('td')].map((c) => c.textContent.trim())).toEqual(['24.6', '3.21']);
+    expect([...linhas[0].querySelectorAll('td')].map((c) => c.textContent.trim())).toEqual(['24,6', '3,21']);
   });
 
   it('mostra zero real de incidencia como zero', () => {
     const doc = new JSDOM(`<main>${montarTabelaClima(semanasClima)}</main>`).window.document;
     const celulas = doc.querySelectorAll('tbody tr')[1].querySelectorAll('td');
-    expect(celulas[1].textContent.trim()).toBe('0.00');
+    expect(celulas[1].textContent.trim()).toBe('0,00');
   });
 
   it('passa na verificacao do axe sem violacao A ou AA', async () => {
@@ -133,5 +133,20 @@ describe('montarTabelaClima', () => {
       runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa'] }
     });
     expect(resultado.violations).toEqual([]);
+  });
+});
+
+describe('formatacao numerica em pt-BR', () => {
+  it('usa ponto como separador de milhar e virgula como decimal', () => {
+    const serie = [{ se: 202510, casos: 2925, mediaMovel: 2764.3333, rotuloNivel: 'Vermelho - alta incidência' }];
+    const celulas = new JSDOM(`<main>${montarTabelaSeries(serie)}</main>`).window.document.querySelectorAll('tbody td');
+    expect(celulas[0].textContent.trim()).toBe('2.925');
+    expect(celulas[1].textContent.trim()).toBe('2.764,3');
+  });
+
+  it('escreve o percentual de alerta com virgula decimal', () => {
+    const alertas = [{ nivel: 1, rotulo: 'Verde - condições desfavoráveis à transmissão', semanas: 62, percentual: 68.9 }];
+    const doc = new JSDOM(`<main>${montarTabelaAlertas(alertas)}</main>`).window.document;
+    expect(doc.querySelectorAll('tbody td')[1].textContent.trim()).toBe('68,9%');
   });
 });

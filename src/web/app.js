@@ -1,4 +1,4 @@
-import { montarTabelaSeries, montarTabelaAlertas, montarTabelaClima, pontosClima } from './tabela.js';
+import { montarTabelaSeries, montarTabelaAlertas, montarTabelaClima, pontosClima, formatarNumero } from './tabela.js';
 
 const semAnimacao = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -18,8 +18,8 @@ async function buscar(caminho) {
 
 function preencherIndicadores(dados) {
   const itens = [
-    ['Casos no período', dados.totalCasos],
-    ['Semana de pico', dados.semanaPico ? `${dados.semanaPico.se} (${dados.semanaPico.casos} casos)` : 'sem dado'],
+    ['Casos no período', formatarNumero(dados.totalCasos)],
+    ['Semana de pico', dados.semanaPico ? `${dados.semanaPico.se} (${formatarNumero(dados.semanaPico.casos)} casos)` : 'sem dado'],
     ['Tendência de transmissão', TEXTO_TENDENCIA[dados.tendencia] ?? dados.tendencia],
     ['Nível de alerta vigente', dados.alertas.find((a) => a.nivel === dados.nivelVigente)?.rotulo ?? 'sem dado']
   ];
@@ -89,6 +89,16 @@ function ligarAlternadores(tabelas) {
   });
 }
 
+// Mostra a faixa entre defasagens junto do maximo: se a faixa e estreita,
+// o "melhor" atraso nao se distingue dos demais e o texto nao deve sugerir o contrario.
+function resumirClima(t) {
+  const validos = t.porDefasagem.filter((d) => d.coeficiente !== null).map((d) => d.coeficiente);
+  const menor = Math.min(...validos);
+  return `A correlação entre temperatura média e incidência variou de ${formatarNumero(menor, 2)} a ${formatarNumero(t.coeficiente, 2)} `
+    + `entre as defasagens de 0 a ${t.porDefasagem.length - 1} semanas; o maior valor ocorre com ${t.defasagem} semana(s), sobre ${t.n} semanas. `
+    + 'Correlação não estabelece causalidade.';
+}
+
 async function iniciar() {
   try {
     const [serie, indicadores, clima, status] = await Promise.all([
@@ -111,7 +121,7 @@ async function iniciar() {
     const t = clima.temperatura;
     document.getElementById('resumo-clima').textContent = t.coeficiente === null
       ? 'Ainda não há dados suficientes para calcular a correlação.'
-      : `A maior correlação entre temperatura média e incidência ocorre com defasagem de ${t.defasagem} semana(s), com coeficiente de ${t.coeficiente.toFixed(2)} sobre ${t.n} semanas. Correlação não estabelece causalidade.`;
+      : resumirClima(t);
   } catch (falha) {
     document.getElementById('atualizacao').textContent =
       'Não foi possível carregar os dados agora. Tente novamente em instantes.';

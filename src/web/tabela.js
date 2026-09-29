@@ -1,8 +1,13 @@
 const SEM_DADO = 'em consolidação';
 
+/** Numero no padrao brasileiro: ponto no milhar, virgula no decimal. */
+export function formatarNumero(valor, casas = 0) {
+  return Number(valor).toLocaleString('pt-BR', { minimumFractionDigits: casas, maximumFractionDigits: casas });
+}
+
 function celula(valor, casas = 0) {
   if (valor === null || valor === undefined) return SEM_DADO;
-  return Number(valor).toFixed(casas);
+  return formatarNumero(valor, casas);
 }
 
 /**
@@ -40,7 +45,7 @@ export function montarTabelaAlertas(alertas) {
       <tr>
         <th scope="row">${a.rotulo}</th>
         <td>${a.semanas}</td>
-        <td>${a.percentual}%</td>
+        <td>${Number(a.percentual).toLocaleString('pt-BR', { maximumFractionDigits: 1 })}%</td>
       </tr>`).join('');
 
   return `
