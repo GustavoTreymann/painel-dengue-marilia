@@ -43,4 +43,40 @@ describe('executarIngestao', () => {
     expect(resultado.sucesso).toBe(false);
     expect(resultado.erro).toBe('banco indisponivel');
   });
+
+  it('nao lanca quando o registro da falha tambem falha', async () => {
+    const resultado = await executarIngestao({
+      pool: {}, geocode: 3529005, anoInicio: 2025, anoFim: 2026,
+      buscar: async () => { throw new Error('banco fora'); },
+      salvar: async () => 0,
+      registrar: async () => { throw new Error('banco fora'); }
+    });
+
+    expect(resultado.sucesso).toBe(false);
+    expect(resultado.erro).toBe('banco fora');
+  });
+
+  it('reporta sucesso quando so o registro da execucao falha', async () => {
+    const resultado = await executarIngestao({
+      pool: {}, geocode: 3529005, anoInicio: 2025, anoFim: 2026,
+      buscar: async () => semanas,
+      salvar: async (_pool, dados) => dados.length,
+      registrar: async () => { throw new Error('log indisponivel'); }
+    });
+
+    expect(resultado.sucesso).toBe(true);
+    expect(resultado.semanasLidas).toBe(2);
+  });
+
+  it('nao lanca quando a rejeicao nao e um Error', async () => {
+    const resultado = await executarIngestao({
+      pool: {}, geocode: 3529005, anoInicio: 2025, anoFim: 2026,
+      buscar: async () => { throw null; },
+      salvar: async () => 0,
+      registrar: async () => {}
+    });
+
+    expect(resultado.sucesso).toBe(false);
+    expect(resultado.erro).toBe('null');
+  });
 });
