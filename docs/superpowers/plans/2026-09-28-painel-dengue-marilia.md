@@ -682,7 +682,9 @@ function numero(valor) {
 
 /** Converte o registro bruto da API no formato usado em todo o projeto. */
 export function normalizarRegistro(bruto) {
-  const casos = bruto.casos === null || bruto.casos === undefined ? null : Number(bruto.casos);
+  // Passa pelo mesmo helper dos demais campos: sem isso, uma string vazia
+  // viraria 0 e o painel mostraria uma queda de casos que nunca existiu.
+  const casos = numero(bruto.casos);
 
   return {
     se: Number(bruto.SE),

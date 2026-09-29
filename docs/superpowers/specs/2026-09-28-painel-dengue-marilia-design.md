@@ -95,6 +95,8 @@ A gravação usa `INSERT ... ON CONFLICT (se) DO UPDATE`, o que torna a ingestã
 
 `parcial` marca semanas ainda em consolidação (`casos` nulo na origem). Essas semanas aparecem nos gráficos com estilo distinto e são **excluídas** dos cálculos de correlação.
 
+**Verificado em 28/09/2026:** na captura real das 90 semanas de Marília, nenhuma semana veio com `casos` nulo — nem com zero casos. A semana mais recente disponível (SE 202637) trazia 11 casos. O tratamento de semana parcial é portanto **defensivo**: existe porque a fonte documenta a correção estatística do atraso de notificação e pode devolver nulo em outros municípios ou períodos, mas não é um fenômeno observado neste recorte. O relatório não deve afirmar que as semanas recentes chegam incompletas.
+
 ## 6. Módulos e interfaces
 
 | Módulo | O que faz | Interface pública | Depende de |

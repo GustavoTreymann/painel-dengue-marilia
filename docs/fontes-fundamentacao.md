@@ -69,8 +69,10 @@ Versão publicada: https://www.sciencedirect.com/science/article/abs/pii/S039876
 **O que o sistema faz, em termos citáveis:**
 - pipeline semi-automatizado de coleta, harmonização e análise, com relatórios semanais
 - correção estatística da incidência para remover o efeito do atraso de notificação —
-  é exatamente por isso que as semanas recentes vêm com `casos` nulo no seu sistema, e
-  é o argumento técnico para nunca tratá-las como zero
+  é o argumento técnico para o sistema nunca tratar ausência de dado como zero.
+  **Cuidado ao citar:** na captura real das 90 semanas de Marília nenhuma semana veio
+  com `casos` nulo, então não escreva no relatório que as semanas recentes chegam
+  incompletas. O tratamento existe como precaução, e é assim que deve ser descrito.
 - estimativa do número reprodutivo efetivo (Rt) por modelos bayesianos
 - classificação semanal em níveis de alerta
 
