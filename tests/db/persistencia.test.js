@@ -54,4 +54,28 @@ describe('persistencia', () => {
     expect(ultima.sucesso).toBe(true);
     expect(ultima.semanasLidas).toBe(3);
   });
+
+  it('devolve colunas NUMERIC como numero, nao como texto', async () => {
+    await salvarSemanas(pool, [registro(202510, {
+      casosEst: 12.5, rt: 1.25, inc100k: 4.2, tempMed: 20.5, umidMed: 70.5
+    })]);
+    const lida = (await listarSemanas(pool, { de: 202510, ate: 202510 }))[0];
+
+    expect(typeof lida.casosEst).toBe('number');
+    expect(typeof lida.rt).toBe('number');
+    expect(typeof lida.inc100k).toBe('number');
+    expect(typeof lida.tempMed).toBe('number');
+    expect(typeof lida.umidMed).toBe('number');
+
+    expect(lida.rt).toBeCloseTo(1.25, 6);
+    expect(lida.tempMed).toBeCloseTo(20.5, 2);
+  });
+
+  it('preserva nulo em coluna NUMERIC em vez de converter para zero', async () => {
+    await salvarSemanas(pool, [registro(202511, { rt: null, tempMed: null })]);
+    const lida = (await listarSemanas(pool, { de: 202511, ate: 202511 }))[0];
+
+    expect(lida.rt).toBeNull();
+    expect(lida.tempMed).toBeNull();
+  });
 });
