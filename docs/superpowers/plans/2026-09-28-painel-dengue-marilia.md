@@ -315,10 +315,12 @@ describe('correlacaoPearson', () => {
 
 describe('correlacaoDefasada', () => {
   it('encontra a defasagem de maior correlacao', () => {
-    // clima cresce uma semana antes da incidencia
+    // O clima lidera a incidencia em uma semana. A primeira incidencia e um
+    // valor destoante de proposito: sem ele, a defasagem 0 empataria com a 1
+    // e o teste nao provaria que a busca de defasagem funciona.
     const registros = [
-      registro(10, 0), registro(20, 5), registro(30, 10),
-      registro(40, 15), registro(50, 20), registro(60, 25)
+      registro(10, 99), registro(20, 10), registro(30, 20),
+      registro(40, 30), registro(50, 40), registro(60, 50)
     ];
     const resultado = correlacaoDefasada(registros, 'tempMed', 3);
     expect(resultado.defasagem).toBe(1);
@@ -429,6 +431,8 @@ export function correlacaoDefasada(registros, campoClima, maxDefasagem) {
     });
   }
 
+  // Empate entre defasagens resolve pela menor: o `>` estrito mantem a
+  // primeira, que e a explicacao mais parcimoniosa.
   const comCoeficiente = porDefasagem.filter((d) => d.coeficiente !== null);
   const melhor = comCoeficiente.length
     ? comCoeficiente.reduce((a, b) => (Math.abs(b.coeficiente) > Math.abs(a.coeficiente) ? b : a))
@@ -441,7 +445,7 @@ export function correlacaoDefasada(registros, campoClima, maxDefasagem) {
 - [ ] **Step 4: Rodar e confirmar que passa**
 
 Run: `npx vitest run tests/analytics/correlacao.test.js`
-Expected: PASS, 10 testes.
+Expected: PASS, 11 testes.
 
 - [ ] **Step 5: Commit**
 
@@ -1225,6 +1229,12 @@ describe('GET /api/status e /healthz', () => {
     const resposta = await request(app()).get('/healthz');
     expect(resposta.status).toBe(200);
   });
+
+  it('devolve 503 no healthz quando o banco nao responde', async () => {
+    const resposta = await request(app({ ultima: async () => { throw new Error('sem banco'); } }))
+      .get('/healthz');
+    expect(resposta.status).toBe(503);
+  });
 });
 ```
 
@@ -1320,7 +1330,16 @@ export function criarRotas({ listar, ultima }) {
     });
   }));
 
-  rotas.get('/healthz', (_req, res) => res.json({ ok: true }));
+  // Verifica o banco de verdade: um healthz que responde ok com o banco fora
+  // faria a hospedagem considerar saudavel uma instancia que nao serve dados.
+  rotas.get('/healthz', async (_req, res) => {
+    try {
+      await ultima();
+      res.json({ ok: true });
+    } catch (falha) {
+      res.status(503).json({ ok: false, erro: falha.message });
+    }
+  });
 
   return rotas;
 }
@@ -1329,7 +1348,7 @@ export function criarRotas({ listar, ultima }) {
 - [ ] **Step 4: Rodar e confirmar que passa**
 
 Run: `npx vitest run tests/api/rotas.test.js`
-Expected: PASS, 10 testes.
+Expected: PASS, 11 testes.
 
 - [ ] **Step 5: Commit**
 
@@ -1383,8 +1402,9 @@ describe('montarTabelaSeries', () => {
   it('mostra semana sem dado como texto explicito, nunca como zero', () => {
     const dom = new JSDOM(`<main>${montarTabelaSeries(semanas)}</main>`);
     const ultimaLinha = dom.window.document.querySelectorAll('tbody tr')[3];
-    expect(ultimaLinha.textContent).toContain('em consolidacao');
-    expect(ultimaLinha.textContent).not.toContain('>0<');
+    const celulaCasos = ultimaLinha.querySelectorAll('td')[0];
+    expect(celulaCasos.textContent.trim()).toBe('em consolidacao');
+    expect(celulaCasos.textContent.trim()).not.toBe('0');
   });
 
   it('descreve o nivel de alerta por texto, nao so por cor', () => {
@@ -1800,12 +1820,15 @@ async function ingerir() {
 }
 
 await migrar(pool);
+
+// A porta abre antes da ingestao: baixar 90 semanas leva segundos, e o
+// healthcheck da hospedagem nao pode esperar por isso no primeiro deploy.
+app.listen(PORTA, () => console.log(`Painel disponivel em http://localhost:${PORTA}`));
+
 await ingerir();
 
 // Uma vez por dia as 4h. O dado de origem e semanal, entao nao ha ganho em rodar mais.
 cron.schedule('0 4 * * *', ingerir);
-
-app.listen(PORTA, () => console.log(`Painel disponivel em http://localhost:${PORTA}`));
 ```
 
 - [ ] **Step 5: Escrever o teste de acessibilidade da página**
