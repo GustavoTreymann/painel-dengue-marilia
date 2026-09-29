@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Painel de vigilancia da dengue em Marilia</title>
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+  <a class="pular" href="#conteudo">Pular para o conteudo</a>
+
+  <header>
+    <h1>Painel de vigilancia da dengue em Marilia</h1>
+    <p id="atualizacao" role="status">Carregando dados...</p>
+  </header>
+
+  <main id="conteudo">
+    <section aria-labelledby="titulo-indicadores">
+      <h2 id="titulo-indicadores">Indicadores do periodo</h2>
+      <dl id="indicadores"></dl>
+    </section>
+
+    <section aria-labelledby="titulo-serie">
+      <h2 id="titulo-serie">Casos por semana epidemiologica</h2>
+      <button type="button" class="alternar" data-alvo="serie" aria-expanded="false">
+        Ver dados em tabela
+      </button>
+      <canvas id="grafico-serie" role="img"
+              aria-label="Grafico de linha com casos de dengue por semana e media movel de tres semanas"></canvas>
+      <div id="serie" hidden></div>
+    </section>
+
+    <section aria-labelledby="titulo-alertas">
+      <h2 id="titulo-alertas">Distribuicao dos niveis de alerta</h2>
+      <canvas id="grafico-alertas" role="img"
+              aria-label="Grafico de barras com a quantidade de semanas em cada nivel de alerta"></canvas>
+      <div id="tabela-alertas"></div>
+    </section>
+
+    <section aria-labelledby="titulo-clima">
+      <h2 id="titulo-clima">Relacao entre clima e incidencia</h2>
+      <p id="resumo-clima"></p>
+      <canvas id="grafico-clima" role="img"
+              aria-label="Grafico de dispersao relacionando temperatura media e incidencia por cem mil habitantes"></canvas>
+    </section>
+  </main>
+
+  <footer>
+    <p>
+      Dados: <a href="https://info.dengue.mat.br">InfoDengue</a>.
+      Projeto Integrador II - Universidade Virtual do Estado de Sao Paulo.
+    </p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

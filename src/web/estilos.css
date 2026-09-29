@@ -1,0 +1,54 @@
+:root {
+  --texto: #1a1a1a;
+  --fundo: #ffffff;
+  --destaque: #0b5c8a;
+  --borda: #767676;
+}
+
+body {
+  margin: 0 auto;
+  max-width: 60rem;
+  padding: 1rem;
+  font-family: system-ui, sans-serif;
+  line-height: 1.6;
+  color: var(--texto);
+  background: var(--fundo);
+}
+
+a { color: var(--destaque); }
+
+.pular {
+  position: absolute;
+  left: -100vw;
+}
+.pular:focus {
+  position: static;
+  display: inline-block;
+  padding: 0.5rem;
+}
+
+:focus-visible {
+  outline: 3px solid var(--destaque);
+  outline-offset: 2px;
+}
+
+button.alternar {
+  padding: 0.5rem 1rem;
+  border: 2px solid var(--destaque);
+  background: var(--fundo);
+  color: var(--destaque);
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+table { border-collapse: collapse; width: 100%; }
+caption { text-align: left; padding-bottom: 0.5rem; font-weight: 600; }
+th, td { border: 1px solid var(--borda); padding: 0.4rem 0.6rem; text-align: left; }
+
+dl { display: grid; grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr)); gap: 1rem; }
+dt { font-weight: 600; }
+dd { margin: 0; font-size: 1.5rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
