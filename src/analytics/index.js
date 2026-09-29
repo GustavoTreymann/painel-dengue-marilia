@@ -102,3 +102,26 @@ export function correlacaoDefasada(registros, campoClima, maxDefasagem) {
 
   return { ...melhor, porDefasagem };
 }
+
+export const ROTULOS_NIVEL = {
+  1: 'Verde - sem indicio de risco',
+  2: 'Amarelo - alerta de transmissao',
+  3: 'Laranja - transmissao sustentada',
+  4: 'Vermelho - risco de epidemia'
+};
+
+/** Distribuicao de semanas por nivel de alerta, sempre com os quatro niveis. */
+export function resumoAlertas(registros) {
+  const comNivel = registros.filter((r) => r.nivel !== null && r.nivel !== undefined);
+  const total = comNivel.length;
+
+  return [1, 2, 3, 4].map((nivel) => {
+    const semanas = comNivel.filter((r) => r.nivel === nivel).length;
+    return {
+      nivel,
+      rotulo: ROTULOS_NIVEL[nivel],
+      semanas,
+      percentual: total === 0 ? 0 : Number(((semanas / total) * 100).toFixed(1))
+    };
+  });
+}
