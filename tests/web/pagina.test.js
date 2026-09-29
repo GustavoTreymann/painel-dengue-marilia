@@ -26,6 +26,21 @@ describe('index.html', () => {
     });
   });
 
+  it('oferece tabela equivalente ao grafico de dispersao do clima', () => {
+    const doc = new JSDOM(html).window.document;
+    const secao = doc.querySelector('section[aria-labelledby="titulo-clima"]');
+    expect(secao.querySelector('button.alternar[data-alvo="tabela-clima"]')).toBeTruthy();
+    expect(secao.querySelector('#tabela-clima')).toBeTruthy();
+  });
+
+  it('escreve o texto visivel com acentuacao correta', () => {
+    const doc = new JSDOM(html).window.document;
+    expect(doc.querySelector('h1').textContent).toBe('Painel de vigilância da dengue em Marília');
+    expect(doc.body.textContent).toContain('Distribuição dos níveis de alerta');
+    expect(doc.body.textContent).toContain('Relação entre clima e incidência');
+    expect(doc.body.textContent).toContain('Universidade Virtual do Estado de São Paulo');
+  });
+
   it('passa na verificacao do axe sem violacao A ou AA', async () => {
     const dom = new JSDOM(html);
     const resultado = await axe.run(dom.window.document.documentElement, {

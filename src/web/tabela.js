@@ -1,4 +1,4 @@
-const SEM_DADO = 'em consolidacao';
+const SEM_DADO = 'em consolidação';
 
 function celula(valor, casas = 0) {
   if (valor === null || valor === undefined) return SEM_DADO;
@@ -20,13 +20,13 @@ export function montarTabelaSeries(semanas) {
 
   return `
     <table>
-      <caption>Casos de dengue por semana epidemiologica em Marilia, com media movel de tres semanas e nivel de alerta</caption>
+      <caption>Casos de dengue por semana epidemiológica em Marília, com média móvel de três semanas e nível de alerta</caption>
       <thead>
         <tr>
           <th scope="col">Semana</th>
           <th scope="col">Casos notificados</th>
-          <th scope="col">Media movel (3 semanas)</th>
-          <th scope="col">Nivel de alerta</th>
+          <th scope="col">Média móvel (3 semanas)</th>
+          <th scope="col">Nível de alerta</th>
         </tr>
       </thead>
       <tbody>${linhas}
@@ -45,12 +45,46 @@ export function montarTabelaAlertas(alertas) {
 
   return `
     <table>
-      <caption>Quantidade de semanas epidemiologicas em cada nivel de alerta</caption>
+      <caption>Quantidade de semanas epidemiológicas em cada nível de alerta</caption>
       <thead>
         <tr>
-          <th scope="col">Nivel de alerta</th>
+          <th scope="col">Nível de alerta</th>
           <th scope="col">Semanas</th>
-          <th scope="col">Percentual do periodo</th>
+          <th scope="col">Percentual do período</th>
+        </tr>
+      </thead>
+      <tbody>${linhas}
+      </tbody>
+    </table>`;
+}
+
+/**
+ * Semanas que entram no grafico de dispersao. Grafico e tabela usam o
+ * mesmo filtro para que a tabela seja de fato equivalente ao grafico.
+ */
+export function pontosClima(semanas) {
+  return semanas.filter((s) => !s.parcial
+    && s.tempMed !== null && s.tempMed !== undefined
+    && s.inc100k !== null && s.inc100k !== undefined);
+}
+
+/** Tabela equivalente ao grafico de dispersao clima x incidencia. */
+export function montarTabelaClima(semanas) {
+  const linhas = pontosClima(semanas).map((s) => `
+      <tr>
+        <th scope="row">${s.se}</th>
+        <td>${celula(s.tempMed, 1)}</td>
+        <td>${celula(s.inc100k, 2)}</td>
+      </tr>`).join('');
+
+  return `
+    <table>
+      <caption>Temperatura média e incidência de dengue por semana epidemiológica consolidada</caption>
+      <thead>
+        <tr>
+          <th scope="col">Semana</th>
+          <th scope="col">Temperatura média (°C)</th>
+          <th scope="col">Incidência por 100 mil habitantes</th>
         </tr>
       </thead>
       <tbody>${linhas}

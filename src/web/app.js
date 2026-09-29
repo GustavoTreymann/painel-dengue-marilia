@@ -1,6 +1,14 @@
-import { montarTabelaSeries, montarTabelaAlertas } from './tabela.js';
+import { montarTabelaSeries, montarTabelaAlertas, montarTabelaClima, pontosClima } from './tabela.js';
 
 const semAnimacao = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// A API devolve a tendencia como codigo estavel; aqui vira texto para leitura.
+const TEXTO_TENDENCIA = {
+  crescimento: 'em crescimento',
+  retracao: 'em retração',
+  estavel: 'estável',
+  indefinida: 'indefinida'
+};
 
 async function buscar(caminho) {
   const resposta = await fetch(caminho);
@@ -10,10 +18,10 @@ async function buscar(caminho) {
 
 function preencherIndicadores(dados) {
   const itens = [
-    ['Casos no periodo', dados.totalCasos],
+    ['Casos no período', dados.totalCasos],
     ['Semana de pico', dados.semanaPico ? `${dados.semanaPico.se} (${dados.semanaPico.casos} casos)` : 'sem dado'],
-    ['Tendencia de transmissao', dados.tendencia],
-    ['Nivel de alerta vigente', dados.alertas.find((a) => a.nivel === dados.nivelVigente)?.rotulo ?? 'sem dado']
+    ['Tendência de transmissão', TEXTO_TENDENCIA[dados.tendencia] ?? dados.tendencia],
+    ['Nível de alerta vigente', dados.alertas.find((a) => a.nivel === dados.nivelVigente)?.rotulo ?? 'sem dado']
   ];
   document.getElementById('indicadores').innerHTML = itens
     .map(([rotulo, valor]) => `<dt>${rotulo}</dt><dd>${valor}</dd>`).join('');
@@ -26,7 +34,7 @@ function desenharSerie(semanas) {
       labels: semanas.map((s) => s.se),
       datasets: [
         { label: 'Casos notificados', data: semanas.map((s) => s.casos), borderColor: '#0b5c8a' },
-        { label: 'Media movel (3 semanas)', data: semanas.map((s) => s.mediaMovel), borderColor: '#8a3b0b', borderDash: [6, 4] }
+        { label: 'Média móvel (3 semanas)', data: semanas.map((s) => s.mediaMovel), borderColor: '#8a3b0b', borderDash: [6, 4] }
       ]
     },
     options: { animation: !semAnimacao, scales: { y: { beginAtZero: true } } }
@@ -41,7 +49,7 @@ function desenharAlertas(alertas) {
     data: {
       labels: alertas.map((a) => a.rotulo),
       datasets: [{
-        label: 'Semanas no nivel',
+        label: 'Semanas no nível',
         data: alertas.map((a) => a.semanas),
         // Cores do protocolo de alerta, sempre acompanhadas do rotulo textual:
         // a informacao nunca depende so da cor.
@@ -53,9 +61,7 @@ function desenharAlertas(alertas) {
 }
 
 function desenharClima(semanas) {
-  const pontos = semanas
-    .filter((s) => !s.parcial && s.tempMed !== null && s.inc100k !== null)
-    .map((s) => ({ x: s.tempMed, y: s.inc100k }));
+  const pontos = pontosClima(semanas).map((s) => ({ x: s.tempMed, y: s.inc100k }));
 
   new Chart(document.getElementById('grafico-clima'), {
     type: 'scatter',
@@ -63,17 +69,17 @@ function desenharClima(semanas) {
     options: {
       animation: !semAnimacao,
       scales: {
-        x: { title: { display: true, text: 'Temperatura media (C)' } },
-        y: { title: { display: true, text: 'Incidencia por 100 mil habitantes' } }
+        x: { title: { display: true, text: 'Temperatura média (°C)' } },
+        y: { title: { display: true, text: 'Incidência por 100 mil habitantes' } }
       }
     }
   });
 }
 
-function ligarAlternadores(semanas) {
+function ligarAlternadores(tabelas) {
   document.querySelectorAll('button.alternar').forEach((botao) => {
     const alvo = document.getElementById(botao.dataset.alvo);
-    alvo.innerHTML = montarTabelaSeries(semanas);
+    alvo.innerHTML = tabelas[botao.dataset.alvo];
     botao.addEventListener('click', () => {
       const aberto = botao.getAttribute('aria-expanded') === 'true';
       botao.setAttribute('aria-expanded', String(!aberto));
@@ -97,15 +103,18 @@ async function iniciar() {
     desenharSerie(serie.semanas);
     desenharAlertas(indicadores.alertas);
     desenharClima(serie.semanas);
-    ligarAlternadores(serie.semanas);
+    ligarAlternadores({
+      serie: montarTabelaSeries(serie.semanas),
+      'tabela-clima': montarTabelaClima(serie.semanas)
+    });
 
     const t = clima.temperatura;
     document.getElementById('resumo-clima').textContent = t.coeficiente === null
-      ? 'Ainda nao ha dados suficientes para calcular a correlacao.'
-      : `A maior correlacao entre temperatura media e incidencia ocorre com defasagem de ${t.defasagem} semana(s), com coeficiente de ${t.coeficiente.toFixed(2)} sobre ${t.n} semanas. Correlacao nao estabelece causalidade.`;
+      ? 'Ainda não há dados suficientes para calcular a correlação.'
+      : `A maior correlação entre temperatura média e incidência ocorre com defasagem de ${t.defasagem} semana(s), com coeficiente de ${t.coeficiente.toFixed(2)} sobre ${t.n} semanas. Correlação não estabelece causalidade.`;
   } catch (falha) {
     document.getElementById('atualizacao').textContent =
-      'Nao foi possivel carregar os dados agora. Tente novamente em instantes.';
+      'Não foi possível carregar os dados agora. Tente novamente em instantes.';
   }
 }
 

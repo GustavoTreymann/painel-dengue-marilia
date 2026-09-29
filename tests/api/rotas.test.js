@@ -33,8 +33,8 @@ describe('GET /api/series', () => {
 
   it('envia o rotulo textual do nivel junto de cada semana', async () => {
     const resposta = await request(app()).get('/api/series');
-    expect(resposta.body.semanas[0].rotuloNivel).toBe('Verde - condicoes desfavoraveis a transmissao');
-    expect(resposta.body.semanas[11].rotuloNivel).toBe('Vermelho - alta incidencia');
+    expect(resposta.body.semanas[0].rotuloNivel).toBe('Verde - condições desfavoráveis à transmissão');
+    expect(resposta.body.semanas[11].rotuloNivel).toBe('Vermelho - alta incidência');
   });
 
   it('repassa o filtro de periodo', async () => {
