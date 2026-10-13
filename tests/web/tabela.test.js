@@ -115,7 +115,7 @@ describe('montarTabelaClima', () => {
     expect(doc.querySelectorAll('thead th[scope="col"]')).toHaveLength(3);
     const linhas = doc.querySelectorAll('tbody tr');
     expect(linhas).toHaveLength(2);
-    expect(linhas[0].querySelector('th').textContent.trim()).toBe('202501');
+    expect(linhas[0].querySelector('th').textContent.trim()).toBe('2025/01');
     expect([...linhas[0].querySelectorAll('td')].map((c) => c.textContent.trim())).toEqual(['24,6', '3,21']);
   });
 

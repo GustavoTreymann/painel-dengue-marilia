@@ -1,0 +1,437 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-13T04:37:06.952Z",
+  "title": "Design System: Painel de vigilância da dengue em Marília",
+  "extensions": {
+    "colorMeta": {
+      "via": {
+        "role": "secondary",
+        "displayName": "Amarelo de Carbono",
+        "canonical": "#F3DC4E",
+        "oklch": "oklch(88.9% 0.158 99.9)",
+        "tonalRamp": [
+          "oklch(15% 0.158 99.9)",
+          "oklch(26% 0.158 99.9)",
+          "oklch(38% 0.158 99.9)",
+          "oklch(50% 0.158 99.9)",
+          "oklch(62% 0.158 99.9)",
+          "oklch(74% 0.158 99.9)",
+          "oklch(85% 0.158 99.9)",
+          "oklch(95% 0.158 99.9)"
+        ]
+      },
+      "papel": {
+        "role": "neutral",
+        "displayName": "Papel",
+        "canonical": "#FFFFFF",
+        "oklch": "oklch(100.0% 0.000 89.9)",
+        "tonalRamp": [
+          "#262626",
+          "#424242",
+          "#5e5e5e",
+          "#777777",
+          "#919191",
+          "#ababab",
+          "#d4d4d4",
+          "#f2f2f2"
+        ]
+      },
+      "tinta": {
+        "role": "neutral",
+        "displayName": "Verde de Impressão",
+        "canonical": "#123F36",
+        "oklch": "oklch(33.4% 0.051 177.3)",
+        "tonalRamp": [
+          "oklch(15% 0.051 177.3)",
+          "oklch(26% 0.051 177.3)",
+          "oklch(38% 0.051 177.3)",
+          "oklch(50% 0.051 177.3)",
+          "oklch(62% 0.051 177.3)",
+          "oklch(74% 0.051 177.3)",
+          "oklch(85% 0.051 177.3)",
+          "oklch(95% 0.051 177.3)"
+        ]
+      },
+      "tinta-suave": {
+        "role": "neutral",
+        "displayName": "Verde de Impressão Suave",
+        "canonical": "#4F5F58",
+        "oklch": "oklch(47.0% 0.023 167.1)",
+        "tonalRamp": [
+          "oklch(15% 0.023 167.1)",
+          "oklch(26% 0.023 167.1)",
+          "oklch(38% 0.023 167.1)",
+          "oklch(50% 0.023 167.1)",
+          "oklch(62% 0.023 167.1)",
+          "oklch(74% 0.023 167.1)",
+          "oklch(85% 0.023 167.1)",
+          "oklch(95% 0.023 167.1)"
+        ]
+      },
+      "caneta": {
+        "role": "primary",
+        "displayName": "Azul de Esferográfica",
+        "canonical": "#2140B4",
+        "oklch": "oklch(43.0% 0.187 266.4)",
+        "tonalRamp": [
+          "oklch(15% 0.187 266.4)",
+          "oklch(26% 0.187 266.4)",
+          "oklch(38% 0.187 266.4)",
+          "oklch(50% 0.187 266.4)",
+          "oklch(62% 0.187 266.4)",
+          "oklch(74% 0.187 266.4)",
+          "oklch(85% 0.187 266.4)",
+          "oklch(95% 0.187 266.4)"
+        ]
+      },
+      "caneta-recuo": {
+        "role": "primary",
+        "displayName": "Azul Recuado",
+        "canonical": "#6F80C8",
+        "oklch": "oklch(61.7% 0.111 272.7)",
+        "tonalRamp": [
+          "oklch(15% 0.111 272.7)",
+          "oklch(26% 0.111 272.7)",
+          "oklch(38% 0.111 272.7)",
+          "oklch(50% 0.111 272.7)",
+          "oklch(62% 0.111 272.7)",
+          "oklch(74% 0.111 272.7)",
+          "oklch(85% 0.111 272.7)",
+          "oklch(95% 0.111 272.7)"
+        ]
+      },
+      "grafite": {
+        "role": "neutral",
+        "displayName": "Grafite",
+        "canonical": "#5E6660",
+        "oklch": "oklch(50.1% 0.014 153.4)",
+        "tonalRamp": [
+          "oklch(15% 0.014 153.4)",
+          "oklch(26% 0.014 153.4)",
+          "oklch(38% 0.014 153.4)",
+          "oklch(50% 0.014 153.4)",
+          "oklch(62% 0.014 153.4)",
+          "oklch(74% 0.014 153.4)",
+          "oklch(85% 0.014 153.4)",
+          "oklch(95% 0.014 153.4)"
+        ]
+      },
+      "filete": {
+        "role": "neutral",
+        "displayName": "Filete (alias de tinta)",
+        "canonical": "#123F36",
+        "oklch": "oklch(33.4% 0.051 177.3)",
+        "tonalRamp": [
+          "oklch(15% 0.051 177.3)",
+          "oklch(26% 0.051 177.3)",
+          "oklch(38% 0.051 177.3)",
+          "oklch(50% 0.051 177.3)",
+          "oklch(62% 0.051 177.3)",
+          "oklch(74% 0.051 177.3)",
+          "oklch(85% 0.051 177.3)",
+          "oklch(95% 0.051 177.3)"
+        ]
+      },
+      "filete-claro": {
+        "role": "neutral",
+        "displayName": "Filete Claro",
+        "canonical": "#C9D3CE",
+        "oklch": "oklch(85.8% 0.013 164.7)",
+        "tonalRamp": [
+          "oklch(15% 0.013 164.7)",
+          "oklch(26% 0.013 164.7)",
+          "oklch(38% 0.013 164.7)",
+          "oklch(50% 0.013 164.7)",
+          "oklch(62% 0.013 164.7)",
+          "oklch(74% 0.013 164.7)",
+          "oklch(85% 0.013 164.7)",
+          "oklch(95% 0.013 164.7)"
+        ]
+      },
+      "nivel-1": {
+        "role": "tertiary",
+        "displayName": "Verde de Alerta (nível 1)",
+        "canonical": "#1B7A3D",
+        "oklch": "oklch(51.1% 0.127 150.4)",
+        "tonalRamp": [
+          "oklch(15% 0.127 150.4)",
+          "oklch(26% 0.127 150.4)",
+          "oklch(38% 0.127 150.4)",
+          "oklch(50% 0.127 150.4)",
+          "oklch(62% 0.127 150.4)",
+          "oklch(74% 0.127 150.4)",
+          "oklch(85% 0.127 150.4)",
+          "oklch(95% 0.127 150.4)"
+        ]
+      },
+      "nivel-2": {
+        "role": "tertiary",
+        "displayName": "Amarelo de Alerta (nível 2)",
+        "canonical": "#D4A900",
+        "oklch": "oklch(75.2% 0.154 90.3)",
+        "tonalRamp": [
+          "oklch(15% 0.154 90.3)",
+          "oklch(26% 0.154 90.3)",
+          "oklch(38% 0.154 90.3)",
+          "oklch(50% 0.154 90.3)",
+          "oklch(62% 0.154 90.3)",
+          "oklch(74% 0.154 90.3)",
+          "oklch(85% 0.154 90.3)",
+          "oklch(95% 0.154 90.3)"
+        ]
+      },
+      "nivel-3": {
+        "role": "tertiary",
+        "displayName": "Laranja de Alerta (nível 3)",
+        "canonical": "#D2600C",
+        "oklch": "oklch(62.0% 0.165 48.1)",
+        "tonalRamp": [
+          "oklch(15% 0.165 48.1)",
+          "oklch(26% 0.165 48.1)",
+          "oklch(38% 0.165 48.1)",
+          "oklch(50% 0.165 48.1)",
+          "oklch(62% 0.165 48.1)",
+          "oklch(74% 0.165 48.1)",
+          "oklch(85% 0.165 48.1)",
+          "oklch(95% 0.165 48.1)"
+        ]
+      },
+      "nivel-4": {
+        "role": "tertiary",
+        "displayName": "Vermelho de Alerta (nível 4)",
+        "canonical": "#A31D1D",
+        "oklch": "oklch(46.4% 0.169 26.9)",
+        "tonalRamp": [
+          "oklch(15% 0.169 26.9)",
+          "oklch(26% 0.169 26.9)",
+          "oklch(38% 0.169 26.9)",
+          "oklch(50% 0.169 26.9)",
+          "oklch(62% 0.169 26.9)",
+          "oklch(74% 0.169 26.9)",
+          "oklch(85% 0.169 26.9)",
+          "oklch(95% 0.169 26.9)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Só o h1 na faixa amarela; largura 88%, máx. 18ch, text-wrap balance."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Semana epidemiológica atual, em caneta, na faixa amarela."
+      },
+      "casela": {
+        "displayName": "Casela",
+        "purpose": "Dígitos dentro das caselas, em caneta; 1,75rem abaixo de 40rem e 1,5rem abaixo de 22,5rem."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Valor de cada indicador (dd)."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Texto corrido; tabelas a 0,9375rem."
+      },
+      "body-anotacao": {
+        "displayName": "Anotação",
+        "purpose": "Resumo analítico ao lado de gráfico, máx. 62ch."
+      },
+      "label-campo": {
+        "displayName": "Label de campo",
+        "purpose": "Títulos numerados dos campos (h2), versal."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Rótulo da faixa, legendas, cabeçalhos de coluna, versal."
+      },
+      "label-sm": {
+        "displayName": "Label pequeno",
+        "purpose": "Rótulos (dt) dos indicadores, em tinta-suave, versal."
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "escrever",
+        "value": "420ms cubic-bezier(0.16, 1, 0.3, 1), atraso 55ms por casela",
+        "purpose": "Único movimento de entrada: dígitos das caselas escritos da esquerda para a direita via clip-path."
+      },
+      {
+        "name": "estado-botao",
+        "value": "140ms ease-out",
+        "purpose": "Troca de fundo e cor do botão alternar."
+      },
+      {
+        "name": "foco-faixa",
+        "value": "160ms ease-out",
+        "purpose": "Opacidade das células da faixa ao focar uma semana."
+      },
+      {
+        "name": "graficos",
+        "value": "none",
+        "purpose": "Chart.js com animation false; tudo desligado em prefers-reduced-motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "folha-uma-coluna",
+        "value": "72rem"
+      },
+      {
+        "name": "empilhar-pares",
+        "value": "60rem"
+      },
+      {
+        "name": "estreito",
+        "value": "40rem"
+      },
+      {
+        "name": "minimo-320",
+        "value": "22.5rem"
+      }
+    ],
+    "chart": {
+      "fontSize": "13px",
+      "tickColor": "tinta-suave",
+      "gridColor": "filete-claro",
+      "tooltip": "fundo tinta, cornerRadius 0, padding 10",
+      "casos": "caneta 2.5px; ponto 5px só na última semana; histórico (antes das 8 semanas finais) em caneta-recuo",
+      "mediaMovel": "grafite 2px, borderDash [7, 5]",
+      "consolidacao": "caneta-recuo, borderDash [3, 4]",
+      "barras": "cor do nível com contorno 1px em tinta"
+    }
+  },
+  "components": [
+    {
+      "name": "Botão alternar tabela",
+      "kind": "button",
+      "refersTo": "button-alternar",
+      "description": "Único botão do sistema: abre e fecha a tabela equivalente de um gráfico, no cabeçalho do campo.",
+      "html": "<button type=\"button\" class=\"ds-alternar\" aria-expanded=\"false\">Ver dados em tabela</button>",
+      "css": ":host{--via:#F3DC4E;--papel:#FFFFFF;--tinta:#123F36;--tinta-suave:#4F5F58;--caneta:#2140B4;--caneta-recuo:#6F80C8;--grafite:#5E6660;--filete-claro:#C9D3CE;--nivel-1:#1B7A3D;--nivel-2:#D4A900;--nivel-3:#D2600C;--nivel-4:#A31D1D;font-family:Archivo,system-ui,sans-serif;font-variant-numeric:tabular-nums;color:var(--tinta);} .ds-alternar{font:inherit;font-size:0.9375rem;font-weight:600;padding:0.4375rem 0.875rem;min-height:2.75rem;border:1px solid var(--tinta);border-radius:0;background:var(--papel);color:var(--tinta);cursor:pointer;transition:background-color 140ms ease-out,color 140ms ease-out;} .ds-alternar:hover{background:var(--via);} .ds-alternar:focus-visible{outline:3px solid var(--caneta);outline-offset:2px;}"
+    },
+    {
+      "name": "Botão alternar tabela (aberto)",
+      "kind": "button",
+      "refersTo": "button-alternar-aberto",
+      "description": "Estado aria-expanded=\"true\": inverte para tinta.",
+      "html": "<button type=\"button\" class=\"ds-alternar-aberto\" aria-expanded=\"true\">Ver dados em tabela</button>",
+      "css": ":host{--via:#F3DC4E;--papel:#FFFFFF;--tinta:#123F36;--tinta-suave:#4F5F58;--caneta:#2140B4;--caneta-recuo:#6F80C8;--grafite:#5E6660;--filete-claro:#C9D3CE;--nivel-1:#1B7A3D;--nivel-2:#D4A900;--nivel-3:#D2600C;--nivel-4:#A31D1D;font-family:Archivo,system-ui,sans-serif;font-variant-numeric:tabular-nums;color:var(--tinta);} .ds-alternar-aberto{font:inherit;font-size:0.9375rem;font-weight:600;padding:0.4375rem 0.875rem;min-height:2.75rem;border:1px solid var(--tinta);border-radius:0;background:var(--tinta);color:var(--papel);cursor:pointer;} .ds-alternar-aberto:focus-visible{outline:3px solid var(--caneta);outline-offset:2px;}"
+    },
+    {
+      "name": "Faixa amarela (via)",
+      "kind": "nav",
+      "refersTo": "via",
+      "description": "Casca da página: h1 à esquerda, semana epidemiológica atual em caneta à direita, fechada por filete de 2px.",
+      "html": "<header class=\"ds-via\"><h1 class=\"ds-via-h1\">Painel de vigilância da dengue em Marília</h1><div class=\"ds-via-se\"><p class=\"ds-via-rotulo\">Semana epidemiológica mais recente</p><p class=\"ds-via-valor\">SE 2026/37</p></div></header>",
+      "css": ":host{--via:#F3DC4E;--papel:#FFFFFF;--tinta:#123F36;--tinta-suave:#4F5F58;--caneta:#2140B4;--caneta-recuo:#6F80C8;--grafite:#5E6660;--filete-claro:#C9D3CE;--nivel-1:#1B7A3D;--nivel-2:#D4A900;--nivel-3:#D2600C;--nivel-4:#A31D1D;font-family:Archivo,system-ui,sans-serif;font-variant-numeric:tabular-nums;color:var(--tinta);} .ds-via{background:var(--via);border-bottom:2px solid var(--tinta);padding:1.5rem 2rem 1.25rem;display:grid;grid-template-columns:1fr auto;align-items:end;gap:1rem 3rem;} .ds-via-h1{margin:0;font-size:2.25rem;font-weight:800;font-stretch:88%;line-height:1.05;letter-spacing:-0.01em;max-width:18ch;} .ds-via-se{text-align:right;} .ds-via-se p{margin:0;} .ds-via-rotulo{font-stretch:70%;font-weight:700;font-size:0.8125rem;letter-spacing:0.12em;text-transform:uppercase;} .ds-via-valor{font-size:2rem;font-weight:650;line-height:1.1;color:var(--caneta);}"
+    },
+    {
+      "name": "Campo numerado",
+      "kind": "card",
+      "refersTo": "campo",
+      "description": "O contêiner do sistema: filete de 1px em tinta no topo e título numerado em versalete condensado. Substitui o cartão.",
+      "html": "<section class=\"ds-campo\"><h2 class=\"ds-rotulo\"><span class=\"ds-num\">02</span>Casos por semana epidemiológica</h2><p class=\"ds-corpo\">Conteúdo do campo.</p></section>",
+      "css": ":host{--via:#F3DC4E;--papel:#FFFFFF;--tinta:#123F36;--tinta-suave:#4F5F58;--caneta:#2140B4;--caneta-recuo:#6F80C8;--grafite:#5E6660;--filete-claro:#C9D3CE;--nivel-1:#1B7A3D;--nivel-2:#D4A900;--nivel-3:#D2600C;--nivel-4:#A31D1D;font-family:Archivo,system-ui,sans-serif;font-variant-numeric:tabular-nums;color:var(--tinta);} .ds-campo{border-top:1px solid var(--tinta);padding-top:0.625rem;} .ds-rotulo{margin:0;font-stretch:70%;font-weight:800;font-size:0.9375rem;letter-spacing:0.12em;text-transform:uppercase;display:flex;align-items:baseline;gap:0.75rem;} .ds-num{color:var(--tinta-suave);font-weight:600;} .ds-corpo{margin:1rem 0 0;line-height:1.55;}"
+    },
+    {
+      "name": "Indicador com caselas",
+      "kind": "custom",
+      "refersTo": "casela",
+      "description": "Componente assinatura: número de destaque escrito um algarismo por caixa, em caneta.",
+      "html": "<dl class=\"ds-ficha\"><dt>Casos no período</dt><dd><span class=\"ds-pente\"><span>3</span><span>6</span><span class=\"ds-sep\"></span><span>9</span><span>3</span><span>7</span></span><span class=\"ds-nota\">90 semanas em base</span></dd></dl>",
+      "css": ":host{--via:#F3DC4E;--papel:#FFFFFF;--tinta:#123F36;--tinta-suave:#4F5F58;--caneta:#2140B4;--caneta-recuo:#6F80C8;--grafite:#5E6660;--filete-claro:#C9D3CE;--nivel-1:#1B7A3D;--nivel-2:#D4A900;--nivel-3:#D2600C;--nivel-4:#A31D1D;font-family:Archivo,system-ui,sans-serif;font-variant-numeric:tabular-nums;color:var(--tinta);} .ds-ficha{margin:0;padding:1rem 0 1.25rem;border-bottom:1px solid var(--filete-claro);} .ds-ficha dt{font-stretch:70%;font-weight:700;font-size:0.8125rem;letter-spacing:0.12em;text-transform:uppercase;font-size:0.75rem;color:var(--tinta-suave);} .ds-ficha dd{margin:0.5rem 0 0;} .ds-pente{display:inline-flex;border-left:1px solid var(--tinta);} .ds-pente>span{width:2.75rem;height:3.625rem;display:grid;place-items:center;border:1px solid var(--tinta);border-left:none;font-size:2.125rem;font-weight:600;color:var(--caneta);animation:ds-escrever 420ms cubic-bezier(0.16,1,0.3,1) both;} .ds-pente>.ds-sep{width:1rem;border-top-color:transparent;border-bottom-color:transparent;animation:none;} .ds-nota{display:block;margin-top:0.375rem;font-size:0.9375rem;color:var(--tinta-suave);} @keyframes ds-escrever{from{clip-path:inset(0 100% 0 0);}to{clip-path:inset(0 0 0 0);}} @media (prefers-reduced-motion:reduce){.ds-pente>span{animation:none;}}"
+    },
+    {
+      "name": "Nível de alerta com amostra",
+      "kind": "chip",
+      "refersTo": "amostra-nivel",
+      "description": "Amostra quadrada da cor oficial, contorno 2px em tinta, sempre ao lado do nome do nível.",
+      "html": "<span class=\"ds-nivel\"><span class=\"ds-amostra\" style=\"background:#1B7A3D\"></span><span>Verde - condições desfavoráveis à transmissão</span></span>",
+      "css": ":host{--via:#F3DC4E;--papel:#FFFFFF;--tinta:#123F36;--tinta-suave:#4F5F58;--caneta:#2140B4;--caneta-recuo:#6F80C8;--grafite:#5E6660;--filete-claro:#C9D3CE;--nivel-1:#1B7A3D;--nivel-2:#D4A900;--nivel-3:#D2600C;--nivel-4:#A31D1D;font-family:Archivo,system-ui,sans-serif;font-variant-numeric:tabular-nums;color:var(--tinta);} .ds-nivel{display:flex;align-items:flex-start;gap:0.75rem;font-size:1.25rem;font-weight:650;line-height:1.3;} .ds-amostra{flex:none;width:1.375rem;height:1.375rem;margin-top:0.15rem;border:2px solid var(--tinta);}"
+    },
+    {
+      "name": "Faixa de alerta semanal",
+      "kind": "custom",
+      "refersTo": "faixa-alerta",
+      "description": "Uma célula de largura exata por semana, colorida pelo nível; slider acessível com leitura em texto.",
+      "html": "<div class=\"ds-faixa\" tabindex=\"0\"><span style=\"background:#A31D1D\"></span><span style=\"background:#A31D1D\"></span><span style=\"background:#1B7A3D\"></span><span style=\"background:#D2600C\"></span><span style=\"background:#1B7A3D\"></span><span style=\"background:#D4A900\"></span><span style=\"background:#1B7A3D\"></span><span style=\"background:#1B7A3D\"></span></div><p class=\"ds-leitura\">SE 2026/37 · Verde · 12 casos</p>",
+      "css": ":host{--via:#F3DC4E;--papel:#FFFFFF;--tinta:#123F36;--tinta-suave:#4F5F58;--caneta:#2140B4;--caneta-recuo:#6F80C8;--grafite:#5E6660;--filete-claro:#C9D3CE;--nivel-1:#1B7A3D;--nivel-2:#D4A900;--nivel-3:#D2600C;--nivel-4:#A31D1D;font-family:Archivo,system-ui,sans-serif;font-variant-numeric:tabular-nums;color:var(--tinta);} .ds-faixa{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);height:1.75rem;border:1px solid var(--tinta);background:var(--filete-claro);cursor:crosshair;} .ds-faixa>span{transition:opacity 160ms ease-out;} .ds-faixa:hover>span{opacity:0.35;} .ds-faixa>span:hover{opacity:1;outline:2px solid var(--tinta);outline-offset:-1px;} .ds-faixa:focus-visible{outline:3px solid var(--caneta);outline-offset:3px;} .ds-leitura{margin:0.25rem 0 0;font-size:0.9375rem;font-weight:600;color:var(--caneta);}"
+    },
+    {
+      "name": "Tabela de dados",
+      "kind": "custom",
+      "refersTo": "tabela",
+      "description": "Tabela equivalente de cada gráfico: cabeçalho condensado, filetes, números em caneta à direita.",
+      "html": "<table class=\"ds-tabela\"><thead><tr><th scope=\"col\">Nível de alerta</th><th scope=\"col\">Semanas</th></tr></thead><tbody><tr><th scope=\"row\">Verde</th><td>62</td></tr><tr><th scope=\"row\">Vermelho</th><td>22</td></tr></tbody></table>",
+      "css": ":host{--via:#F3DC4E;--papel:#FFFFFF;--tinta:#123F36;--tinta-suave:#4F5F58;--caneta:#2140B4;--caneta-recuo:#6F80C8;--grafite:#5E6660;--filete-claro:#C9D3CE;--nivel-1:#1B7A3D;--nivel-2:#D4A900;--nivel-3:#D2600C;--nivel-4:#A31D1D;font-family:Archivo,system-ui,sans-serif;font-variant-numeric:tabular-nums;color:var(--tinta);} .ds-tabela{border-collapse:collapse;width:100%;font-size:0.9375rem;} .ds-tabela th,.ds-tabela td{padding:0.4375rem 0.75rem;border-bottom:1px solid var(--filete-claro);text-align:right;} .ds-tabela th:first-child{padding-left:0;text-align:left;} .ds-tabela td:last-child{padding-right:0;} .ds-tabela th[scope=col]{font-stretch:70%;font-weight:700;font-size:0.8125rem;letter-spacing:0.12em;text-transform:uppercase;border-bottom:1px solid var(--tinta);vertical-align:bottom;} .ds-tabela th[scope=row]{font-weight:600;} .ds-tabela td{color:var(--caneta);}"
+    }
+  ],
+  "narrative": {
+    "northStar": "A Ficha de Campo",
+    "overview": "O painel é a 2ª via amarela de um formulário de vigilância preenchido à mão pelo agente de combate às endemias. O formulário (impresso) e o que foi anotado nele (à caneta) são duas camadas que nunca se confundem: tudo o que é estrutura, rótulo e texto sai em tinta verde de impressão; tudo o que é dado medido sai em azul de esferográfica. A faixa amarela de carbono no topo é a casca; o resto é folha branca dividida por filetes.\n\nA densidade é de formulário, não de dashboard: campos numerados (01 a 04) separados por filetes, sem cartões, sem sombras, sem cantos arredondados. A hierarquia vem de uma família só (Archivo), modulada pelo eixo de largura: rótulos de campo em versalete condensado, título em largura 88%, corpo em largura normal, números sempre tabulares. Os números principais ficam em caselas, uma caixa por algarismo, como num formulário preenchido a lápis.\n\nO único movimento da página é a escrita das caselas; os gráficos chegam prontos. As cores oficiais de alerta do InfoDengue nunca aparecem sem o rótulo de texto correspondente.",
+    "keyCharacteristics": [
+      "Duas tintas: verde de impressão para o formulário, azul de caneta para o dado anotado.",
+      "Filetes de 1px fazem toda a divisão; 2px só nas bordas da folha (faixa e rodapé).",
+      "Uma família (Archivo), hierarquia pelo eixo de largura; numerais tabulares alinhados à direita.",
+      "Caselas (caixas por algarismo) carregam os números de destaque.",
+      "Plano, sem sombra, sem raio.",
+      "Semana em consolidação é tracejada, nunca um valor."
+    ],
+    "rules": [
+      {
+        "name": "The Two Inks Rule",
+        "body": "Tinta verde é o formulário; caneta azul é o que foi anotado nele. Se o valor veio dos dados, é azul; se o texto estaria impresso na ficha em branco, é verde.",
+        "section": "colors"
+      },
+      {
+        "name": "The Label-Before-Colour Rule",
+        "body": "Cor de alerta nunca aparece sozinha: amostra ao lado do nome do nível, faixa com legenda nomeada e leitura em texto da semana focada, barras com o rótulo no eixo.",
+        "section": "colors"
+      },
+      {
+        "name": "The Paleta Única Rule",
+        "body": "As cores existem só nas custom properties de `:root`; os gráficos as leem de lá em tempo de execução.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Family Rule",
+        "body": "Só Archivo. Hierarquia por peso e largura, nunca por uma segunda família.",
+        "section": "typography"
+      },
+      {
+        "name": "The Tabular Rule",
+        "body": "`tabular-nums` no corpo inteiro; colunas numéricas alinham à direita, colunas de texto à esquerda.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat Sheet Rule",
+        "body": "Papel não flutua. Nada de `box-shadow`, nada de cartões; separação é filete ou espaço.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Filete Rule",
+        "body": "Toda divisão é um filete horizontal ou uma caixa de contorno fino. Nenhum fundo colorido delimita área, exceto a faixa amarela.",
+        "section": "shapes"
+      }
+    ],
+    "dos": [
+      "**Do** escrever todo valor vindo dos dados em caneta (#2140B4) e todo texto de formulário em tinta (#123F36).",
+      "**Do** dividir com filetes: 1px em tinta no topo de cada campo, 1px em filete-claro entre itens, 2px só nas bordas da folha.",
+      "**Do** numerar os campos (01, 02...) no título em versalete condensado, número em tinta-suave.",
+      "**Do** acompanhar toda cor de alerta com o nome do nível em texto.",
+      "**Do** desenhar a semana em consolidação como traço tracejado e escrever \"em consolidação\" no lugar do número.",
+      "**Do** dar a cada gráfico a sua tabela equivalente, aberta pelo botão de alternar.",
+      "**Do** ler as cores dos gráficos das custom properties de `:root`."
+    ],
+    "donts": [
+      "**Don't** usar sombra, cartão ou canto arredondado em nenhum elemento.",
+      "**Don't** usar caneta azul em títulos, rótulos ou estrutura; ela é só para dado anotado.",
+      "**Don't** usar o amarelo de carbono (#F3DC4E) como cor de alerta nem o amarelo de alerta (#D4A900) como fundo.",
+      "**Don't** introduzir uma segunda família tipográfica.",
+      "**Don't** animar os gráficos; o único movimento de entrada é a escrita das caselas, e tudo cai com `prefers-reduced-motion`."
+    ]
+  }
+}

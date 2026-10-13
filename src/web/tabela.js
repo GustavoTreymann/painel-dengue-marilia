@@ -5,6 +5,12 @@ export function formatarNumero(valor, casas = 0) {
   return Number(valor).toLocaleString('pt-BR', { minimumFractionDigits: casas, maximumFractionDigits: casas });
 }
 
+/** Semana epidemiologica AAAASS escrita como ano/semana: 202510 vira "2025/10". */
+export function formatarSE(se) {
+  const n = Number(se);
+  return `${Math.floor(n / 100)}/${String(n % 100).padStart(2, '0')}`;
+}
+
 function celula(valor, casas = 0) {
   if (valor === null || valor === undefined) return SEM_DADO;
   return formatarNumero(valor, casas);
@@ -17,7 +23,7 @@ function celula(valor, casas = 0) {
 export function montarTabelaSeries(semanas) {
   const linhas = semanas.map((s) => `
       <tr>
-        <th scope="row">${s.se}</th>
+        <th scope="row">${formatarSE(s.se)}</th>
         <td>${celula(s.casos)}</td>
         <td>${celula(s.mediaMovel, 1)}</td>
         <td>${s.rotuloNivel ?? SEM_DADO}</td>
@@ -77,7 +83,7 @@ export function pontosClima(semanas) {
 export function montarTabelaClima(semanas) {
   const linhas = pontosClima(semanas).map((s) => `
       <tr>
-        <th scope="row">${s.se}</th>
+        <th scope="row">${formatarSE(s.se)}</th>
         <td>${celula(s.tempMed, 1)}</td>
         <td>${celula(s.inc100k, 2)}</td>
       </tr>`).join('');

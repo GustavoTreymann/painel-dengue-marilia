@@ -4,52 +4,87 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Painel de vigilância da dengue em Marília</title>
+  <meta name="description" content="Casos, níveis de alerta e relação entre clima e incidência da dengue em Marília-SP, com dados abertos do InfoDengue.">
+  <meta name="theme-color" content="#F3DC4E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&display=swap">
   <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
   <a class="pular" href="#conteudo">Pular para o conteúdo</a>
 
-  <header>
-    <h1>Painel de vigilância da dengue em Marília</h1>
-    <p id="atualizacao" role="status">Carregando dados...</p>
+  <header class="via">
+    <div class="via-interna">
+      <h1>Painel de vigilância da dengue em Marília</h1>
+      <div class="via-se">
+        <p class="via-rotulo">Semana epidemiológica mais recente</p>
+        <p class="via-valor" id="semana-atual">—</p>
+        <p id="atualizacao" role="status">Carregando dados...</p>
+      </div>
+    </div>
   </header>
 
-  <main id="conteudo">
-    <section aria-labelledby="titulo-indicadores">
-      <h2 id="titulo-indicadores">Indicadores do período</h2>
-      <dl id="indicadores"></dl>
+  <main id="conteudo" class="folha" aria-busy="true">
+    <section class="campo campo-indicadores" aria-labelledby="titulo-indicadores">
+      <h2 id="titulo-indicadores" class="rotulo"><span class="num" aria-hidden="true">01</span>Indicadores do período</h2>
+      <dl id="indicadores" class="fichas"></dl>
     </section>
 
-    <section aria-labelledby="titulo-serie">
-      <h2 id="titulo-serie">Casos por semana epidemiológica</h2>
-      <button type="button" class="alternar" data-alvo="serie" aria-expanded="false">
-        Ver dados em tabela
-      </button>
-      <canvas id="grafico-serie" role="img"
-              aria-label="Gráfico de linha com casos de dengue por semana e média móvel de três semanas"></canvas>
-      <div id="serie" hidden></div>
+    <section class="campo campo-serie" aria-labelledby="titulo-serie">
+      <div class="campo-cabeca">
+        <h2 id="titulo-serie" class="rotulo"><span class="num" aria-hidden="true">02</span>Casos por semana epidemiológica</h2>
+        <button type="button" class="alternar" data-alvo="serie" aria-expanded="false" aria-controls="serie">
+          Ver dados em tabela
+        </button>
+      </div>
+      <div id="faixa-alerta" class="faixa" tabindex="0" role="slider"
+           aria-label="Nível de alerta por semana; use as setas para percorrer as semanas"
+           aria-valuemin="0" aria-valuemax="0" aria-valuenow="0" aria-valuetext="Carregando dados"></div>
+      <div class="faixa-legenda" id="faixa-legenda"></div>
+      <p class="faixa-leitura" id="faixa-leitura" aria-hidden="true"></p>
+      <div class="grafico grafico-serie">
+        <canvas id="grafico-serie" role="img"
+                aria-label="Gráfico de linha com casos de dengue por semana e média móvel de três semanas"></canvas>
+      </div>
+      <ul class="legenda" aria-hidden="true">
+        <li><span class="traco traco-casos"></span>Casos notificados</li>
+        <li><span class="traco traco-media"></span>Média móvel (3 semanas)</li>
+        <li id="legenda-consolidacao" hidden><span class="traco traco-consolidacao"></span>Semana em consolidação</li>
+      </ul>
+      <div id="serie" class="tabela-rolagem" tabindex="0" role="region" aria-label="Tabela de casos por semana" hidden></div>
     </section>
 
-    <section aria-labelledby="titulo-alertas">
-      <h2 id="titulo-alertas">Distribuição dos níveis de alerta</h2>
-      <canvas id="grafico-alertas" role="img"
-              aria-label="Gráfico de barras com a quantidade de semanas em cada nível de alerta"></canvas>
-      <div id="tabela-alertas"></div>
+    <section class="campo campo-alertas" aria-labelledby="titulo-alertas">
+      <h2 id="titulo-alertas" class="rotulo"><span class="num" aria-hidden="true">03</span>Distribuição dos níveis de alerta</h2>
+      <div class="lado-a-lado">
+        <div class="grafico grafico-alertas">
+          <canvas id="grafico-alertas" role="img"
+                  aria-label="Gráfico de barras com a quantidade de semanas em cada nível de alerta"></canvas>
+        </div>
+        <div id="tabela-alertas" tabindex="0" role="region" aria-label="Tabela de semanas por nível de alerta"></div>
+      </div>
     </section>
 
-    <section aria-labelledby="titulo-clima">
-      <h2 id="titulo-clima">Relação entre clima e incidência</h2>
-      <p id="resumo-clima"></p>
-      <button type="button" class="alternar" data-alvo="tabela-clima" aria-expanded="false">
-        Ver dados em tabela
-      </button>
-      <canvas id="grafico-clima" role="img"
-              aria-label="Gráfico de dispersão relacionando temperatura média e incidência por cem mil habitantes"></canvas>
-      <div id="tabela-clima" hidden></div>
+    <section class="campo campo-clima" aria-labelledby="titulo-clima">
+      <div class="campo-cabeca">
+        <h2 id="titulo-clima" class="rotulo"><span class="num" aria-hidden="true">04</span>Relação entre clima e incidência</h2>
+        <button type="button" class="alternar" data-alvo="tabela-clima" aria-expanded="false" aria-controls="tabela-clima">
+          Ver dados em tabela
+        </button>
+      </div>
+      <div class="lado-a-lado">
+        <p id="resumo-clima" class="anotacao"></p>
+        <div class="grafico grafico-clima">
+          <canvas id="grafico-clima" role="img"
+                  aria-label="Gráfico de dispersão relacionando temperatura média e incidência por cem mil habitantes"></canvas>
+        </div>
+      </div>
+      <div id="tabela-clima" class="tabela-rolagem" tabindex="0" role="region" aria-label="Tabela de temperatura e incidência" hidden></div>
     </section>
   </main>
 
-  <footer>
+  <footer class="rodape">
     <p>
       Dados: <a href="https://info.dengue.mat.br">InfoDengue</a>.
       Projeto Integrador II - Universidade Virtual do Estado de São Paulo.
