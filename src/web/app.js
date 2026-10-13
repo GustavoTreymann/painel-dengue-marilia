@@ -303,7 +303,7 @@ function desenharClima(semanas) {
     options: {
       maintainAspectRatio: false,
       scales: {
-        x: { title: { display: true, text: 'Temperatura média (°C)', color: COR.tinta } },
+        x: { title: { display: true, text: 'Temperatura média na mesma semana (°C)', color: COR.tinta } },
         y: { beginAtZero: true, title: { display: true, text: 'Incidência por 100 mil habitantes', color: COR.tinta } }
       },
       plugins: {
