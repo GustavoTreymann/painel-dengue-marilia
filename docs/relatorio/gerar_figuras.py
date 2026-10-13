@@ -66,9 +66,10 @@ for nome, v in tabela: print(nome, v)
 # ---------- Recortes da captura do painel ----------
 tela = Image.open(FIG / "painel-completo.png")
 largura = tela.width
-recortes = {"fig-painel-topo.png": (140, 0, 1140, 990),
-            "fig-painel-alertas.png": (140, 990, 1140, 1780),
-            "fig-painel-clima.png": (140, 1780, 1140, 2485)}
+# Captura de 1440 px de largura com escala 2 (scripts/demo-sem-banco.js); caixas em pixels da imagem.
+recortes = {"fig-painel-topo.png": (56, 0, 2800, 1660),
+            "fig-painel-alertas.png": (56, 1676, 2800, 2330),
+            "fig-painel-clima.png": (56, 2352, 2800, 3270)}
 for nome, caixa in recortes.items():
     tela.crop(caixa).save(FIG / nome)
 print("ok", tela.size)
